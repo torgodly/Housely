@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('estate_utility', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_id');
+            $table->foreignId('estate_id');
             $table->foreignId('utility_id');
             $table->integer('quantity');
             $table->timestamps();

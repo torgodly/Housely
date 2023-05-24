@@ -19,10 +19,17 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    //create estate
+    Route::get('/estate/create', [\App\Http\Controllers\EstateController::class, 'create'])->name('estate.create');
+    Route::post('/estate', [\App\Http\Controllers\EstateController::class, 'store'])->name('estate.store');
+
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

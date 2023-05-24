@@ -16,8 +16,9 @@ class UtilityFactory extends Factory
      */
     public function definition(): array
     {
+        $utility = ["Bathroom", "Kitchen", "Living Room", "Bedroom", "Garage", "Laundry Room", "Pool", "Garden", "Patio", "Attic", "Basement", "Closet", "Den", "Dining Room", "Foyer", "Home Office", "Mudroom", "Playroom"];
         return [
-            'name' => $this->faker->word,
+            'name' => $this->faker->unique()->randomElement($utility),
         ];
     }
 }
