@@ -2,9 +2,10 @@
 
 <!-- Include select2 CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet"/>
-<select name="{{ $name }}[]" id="{{ $name }}"
+
+<select name="{{ $name }}" id="{{ $name }}"
         class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"
-        multiple>
+        multiple="multiple" wire:model="utilities">
     @foreach ($options as $option)
         <option
             value="{{ $option->id }}" {{ in_array($option, $selected) ? 'selected' : '' }}>{{ $option->name }}</option>
@@ -13,11 +14,18 @@
 
 <!-- Include select2 JavaScript -->
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     <script>
-        $(document).ready(function () {
-            $('#{{ $name }}').select2({
-                placeholder: 'Select a category'
+        $(document).ready(function() {
+            // Initialize Select2 dropdown
+            $('#{{ $name }}').select2();
+
+            // Handle change event
+            $('#{{ $name }}').on('change', function() {
+                // Get selected values
+                const selectedValues = $(this).val();
+
+                // Call Livewire method to update property array
+                Livewire.emit('updateSelectedValues', selectedValues);
             });
         });
     </script>
