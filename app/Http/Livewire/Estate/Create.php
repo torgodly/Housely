@@ -20,7 +20,6 @@ class Create extends Component
     public $land_area;
     public $building_area;
     public $price;
-    public $status;
     public $longitude;
     public $latitude;
     public $utilities = [];
@@ -99,7 +98,6 @@ class Create extends Component
             'land_area' => $this->land_area,
             'building_area' => $this->building_area,
             'price' => $this->price,
-            'status' => $this->status,
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
         ]);

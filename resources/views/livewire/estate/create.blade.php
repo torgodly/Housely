@@ -1,9 +1,14 @@
-<div class="py-12">
+<div class="py-12" >
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 ">
+        <div class="relative p-4 sm:p-8 bg-white shadow sm:rounded-lg absolute">
+            <div class="fixed inset-0 flex items-center justify-center bg-gray-400/50"  wire:loading wire:target="submit">
+                <img src="{{asset('images/ui/announcement.gif')}}" class="w-40 h-40">
+            </div>
             <x-steps steps="4" current="{{$step}}"></x-steps>
+
             <div class="max-w-full">
+
                 <section>
                     <header>
                         <h2 class="text-lg font-medium text-gray-900">
@@ -183,7 +188,8 @@
                                 <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
                                                   type="button">{{ __('prev') }}</x-primary-button>
                             @else
-                                <x-primary-button wire:click="submit" type="button">{{ __('Submit') }}</x-primary-button>
+                                <x-primary-button wire:click="submit"
+                                                  type="button">{{ __('Submit') }}</x-primary-button>
 
                             @endif
 
@@ -195,6 +201,7 @@
             </div>
         </div>
     </div>
+
     <script>
 
         // Create the map

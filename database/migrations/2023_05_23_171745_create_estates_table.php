@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->float('longitude');
             $table->float('latitude');
             $table->decimal('price', 10, 2);
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
