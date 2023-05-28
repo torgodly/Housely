@@ -10,14 +10,13 @@
                             {{ __('create New Estate') }}
                         </h2>
                     </header>
-                    {{--                    @json($utilities)--}}
                     <div class="mt-6 space-y-6">
-
                         <div class="{{ $step != 1 ? 'hidden' : '' }} max-w-xl">
                             <div>
                                 <x-input-label for="type" :value="__('Estate Type')"/>
-                                <x-select-input :label="'type'" :name="'type'" wire:model="type"
-                                                class="block mt-1 w-full"
+
+                                <x-select-input label="type" name="type"
+                                                class="block mt-1 w-full" wire:model="type"
                                                 :options="['House' => 'house','Land' => 'land', 'Flat' => 'flat']"/>
                                 <x-input-error :messages="$errors->get('type')"
                                                class="mt-2"/>
@@ -106,7 +105,7 @@
                                                                             <div
                                                                                 class="text-sm leading-5 text-gray-900">
                                                                                 <x-text-input type="checkbox"
-                                                                                              wire:model.lazy="utilities.{{ $allUtilitie->id }}.quantity"
+                                                                                              wire:click="toggleUtility({{$allUtilitie->id}})"
                                                                                               value="1"/>
                                                                             </div>
                                                                         </td>
@@ -118,10 +117,10 @@
                                                                                     <x-text-input type="number"
                                                                                                   wire:model.lazy="utilities.{{ $allUtilitie->id }}.quantity"
                                                                                                   value="{{$utilities[$allUtilitie->id]['quantity'] ?? 1}}"/>
-                                                                                    <x-input-error :messages="$errors->get('utilities.{{ $allUtilitie->id }}.quantity')"
-                                                                                                   class="mt-2"/>
+
                                                                                 @else
                                                                                     <x-text-input type="number" disabled
+                                                                                                  wire:model.lazy="utilities.{{ $allUtilitie->id }}.quantity"
                                                                                                   class="bg-gray-100"/>
                                                                                 @endif
                                                                             </div>
@@ -177,11 +176,17 @@
                         </div>
 
 
-                        <div class="flex items-center gap-4">
-                            <x-primary-button wire:click="nextStep"
-                                              type="button">{{ __('Next') }}</x-primary-button>
-                            <x-primary-button wire:click="previousStep"
-                                              type="button">{{ __('prev') }}</x-primary-button>
+                        <div class="flex items-center justify-between flex-row-reverse gap-4">
+                            @if($step != 4)
+                                <x-primary-button wire:click="nextStep" disabled="{{ $step == 4 }}"
+                                                  type="button">{{ __('Next') }}</x-primary-button>
+                                <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
+                                                  type="button">{{ __('prev') }}</x-primary-button>
+                            @else
+                                <x-primary-button wire:click="submit" type="button">{{ __('Submit') }}</x-primary-button>
+
+                            @endif
+
                         </div>
 
                     </div>

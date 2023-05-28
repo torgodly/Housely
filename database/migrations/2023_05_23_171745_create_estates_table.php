@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->string('country');
             $table->float('land_area');
             $table->float('building_area');
+            $table->float('longitude');
+            $table->float('latitude');
             $table->decimal('price', 10, 2);
             $table->boolean('status');
             $table->timestamps();

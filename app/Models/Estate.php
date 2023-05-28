@@ -18,6 +18,8 @@ class Estate extends Model
         'building_area',
         'price',
         'status',
+        'longitude',
+        'latitude',
     ];
 
     public function utilities()

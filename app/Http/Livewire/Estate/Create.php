@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Estate;
 
+use App\Models\Estate;
 use App\Models\Utility;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -9,12 +10,13 @@ use Livewire\WithFileUploads;
 class Create extends Component
 {
     use WithFileUploads;
+
     public $step = 1;
 
-    public $type;
+    public $type = '';
+    public $city = '';
+    public $country = '';
     public $address;
-    public $city;
-    public $country;
     public $land_area;
     public $building_area;
     public $price;
@@ -30,6 +32,7 @@ class Create extends Component
 
         return view('livewire.estate.create', compact('allUtilities'));
     }
+
     public function updateCoordinates($longitude, $latitude)
     {
         $this->longitude = $longitude;
@@ -39,6 +42,8 @@ class Create extends Component
 
     public function nextStep()
     {
+
+//        dd($this->price);
         if ($this->step == 1) {
             $this->validate([
                 'type' => 'required',
@@ -53,7 +58,6 @@ class Create extends Component
         if ($this->step == 2) {
             $this->validate([
                 'utilities' => 'required',
-
                 'utilities.*.quantity' => 'required|numeric|min:1',
             ]);
         }
@@ -74,15 +78,52 @@ class Create extends Component
 
     public function previousStep()
     {
-        $this->step--;
+
+        //step cant be less than 1
+        if ($this->step >= 2) {
+            $this->step--;
+        }
+
+
     }
 
 
     public function submit()
     {
         // Add your code to save the estate here
+        $estate = Estate::create([
+            'type' => $this->type,
+            'address' => $this->address,
+            'city' => $this->city,
+            'country' => $this->country,
+            'land_area' => $this->land_area,
+            'building_area' => $this->building_area,
+            'price' => $this->price,
+            'status' => $this->status,
+            'longitude' => $this->longitude,
+            'latitude' => $this->latitude,
+        ]);
+        //save utilities
+        $estate->utilities()->attach($this->utilities);
+        //save images
+        foreach ($this->images as $image) {
+            $image->store('public/estates');
+            $estate->images()->create([
+                'path' => $image->hashName(),
+            ]);
+        }
+        session()->flash('message', 'Estate successfully created.');
 
         $this->reset(); // Resets all the component's properties
+    }
+
+    public function toggleUtility($utilityId)
+    {
+        if (isset($this->utilities[$utilityId])) {
+            unset($this->utilities[$utilityId]);
+        } else {
+            $this->utilities[$utilityId] = ['quantity' => 1];
+        }
     }
 
 }
