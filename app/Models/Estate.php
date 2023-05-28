@@ -26,4 +26,9 @@ class Estate extends Model
     {
         return $this->belongsToMany(Utility::class)->withPivot('quantity');
     }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }
