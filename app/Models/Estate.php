@@ -21,6 +21,7 @@ class Estate extends Model
         'longitude',
         'latitude',
     ];
+    protected $with = ['utilities:id,name,estate_utility.quantity', 'images'];
 
     public function utilities()
     {
