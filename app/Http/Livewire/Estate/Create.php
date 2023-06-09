@@ -110,7 +110,7 @@ class Create extends Component
                 'path' => $image->hashName(),
             ]);
         }
-        session()->flash('message', 'Estate successfully created.');
+        session()->flash('Success', __('Estate successfully created.'));
 
         $this->reset(); // Resets all the component's properties
     }
