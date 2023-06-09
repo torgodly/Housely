@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $images = \App\Models\Estate::find(1)->images;
+    return view('estate.show' , compact('images'));
 });
 
 Route::get('/dashboard', function () {
@@ -26,8 +27,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     //create estate
     Route::get('/estate/create', [\App\Http\Controllers\EstateController::class, 'create'])->name('estate.create');
-    Route::post('/estate', [\App\Http\Controllers\EstateController::class, 'store'])->name('estate.store');
-
+//show
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,4 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/estate/{estate}', [\App\Http\Controllers\EstateController::class, 'show'])->name('estate.show');
+
+
+require __DIR__ . '/auth.php';
