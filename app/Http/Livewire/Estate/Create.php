@@ -25,6 +25,7 @@ class Create extends Component
     public $utilities = [];
     public $images = [];
 
+
     public function render()
     {
         $allUtilities = Utility::all();
@@ -98,8 +99,8 @@ class Create extends Component
             'land_area' => $this->land_area,
             'building_area' => $this->building_area,
             'price' => $this->price,
-            'longitude' => $this->longitude,
-            'latitude' => $this->latitude,
+            'long' => $this->longitude,
+            'lat' => $this->latitude,
         ]);
         //save utilities
         $estate->utilities()->attach($this->utilities);

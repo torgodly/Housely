@@ -9,18 +9,7 @@ class Estate extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'type',
-        'address',
-        'city',
-        'country',
-        'land_area',
-        'building_area',
-        'price',
-        'status',
-        'longitude',
-        'latitude',
-    ];
+    protected $guarded = [];
     protected $with = ['utilities:id,name,estate_utility.quantity', 'images'];
 
     public function utilities()
