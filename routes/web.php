@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $images = \App\Models\Estate::find(1)->images;
-    return view('estate.show' , compact('images'));
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
