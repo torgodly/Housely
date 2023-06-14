@@ -12,16 +12,24 @@ return new class extends Migration {
     {
         Schema::create('estates', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->string('type');
             $table->string('address');
             $table->string('city');
             $table->string('country');
             $table->float('land_area');
             $table->float('building_area');
-            $table->float('longitude');
-            $table->float('latitude');
-            $table->decimal('price', 10, 2);
+            $table->string('long');
+            $table->string('lat');
+            $table->integer('price');
+            $table->float('discount')->nullable();
+            $table->float('commission')->nullable();
+            $table->integer('floors')->nullable();
+            $table->integer('year_built')->nullable();
+            $table->text('description')->nullable();
             $table->boolean('status')->default(1);
+            $table->string('company');
+            //TODO: add type of  estate rent or sale
             $table->timestamps();
         });
     }
