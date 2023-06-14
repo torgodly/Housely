@@ -17,7 +17,10 @@
 <body class="font-sans text-gray-900 antialiased">
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
 
-
+<div>
+    <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+</div>
 
 </div>
 </body>
