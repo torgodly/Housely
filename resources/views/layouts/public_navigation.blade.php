@@ -11,7 +11,7 @@
             </div>
 
             {{--search bar--}}
-            <div class="shrink-0 flex items-center ">
+            <div class="shrink-0 flex items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
                 <div id="search-bar"
                     class="pl-2 rounded-full  border   shadow-md hover:shadow-lg transition duration-200 ease-in-out flex justify-between items-center gap-8 md:gap-28">
                     <h1 class="px-4 font-bold text-sm">Start your search</h1>
@@ -27,9 +27,9 @@
 
             </div>
             {{--            setting + language + add your house--}}
-            <div class="shrink-0 flex items-center justify-between">
+            <div class="shrink-0 flex items-center justify-between gap-5">
                 <x-secondary-button
-                    class="border-0 shadow-none focus:ring-0 hover:bg-gray-100 focus:border-0 !rounded-full hidden md:block">Add
+                    class="border-0 !shadow-none focus:ring-0 hover:bg-[#F7F7F7] focus:border-0 !rounded-full hidden md:block !py-2 !px-4 !text-base  !normal-case">Add
                     your house
                 </x-secondary-button>
                 <div class="hover:bg-gray-100 rounded-full p-2">
