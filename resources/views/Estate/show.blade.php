@@ -203,7 +203,7 @@
                             </div>
                             <div class="flex justify-between items-baseline gap-32 mt-4">
                                 <h1 class="font-semibold text-lg text-black">Total Price</h1>
-                                <h1 class="font-bold text-lg text-black">${{ number_format($estate->price + ($estate->price * $estate->commission / 100) - ($estate->price * $estate->discount / 100),) }}</h1>
+                                <h1 class="font-bold text-lg text-black">${{ number_format($estate->price - ($estate->price * $estate->discount / 100),) }}</h1>
                             </div>
 
                         </div>
@@ -275,8 +275,10 @@
         });
         marker.setStyle(new ol.style.Style({
             image: new ol.style.Icon({
-                anchor: [0.5, 1],
-                src: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                // anchor: [0.5, 1],
+                src: '{{asset('images/ui/pin.png')}}',
+                //size 64px
+                scale: 0.16
             })
         }));
 
