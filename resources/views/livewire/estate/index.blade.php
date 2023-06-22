@@ -1,12 +1,12 @@
-<div class="max-w-full mx-20  pt-10 space-y-2 ">
+<div class="max-w-full md:mx-20 mx-10  pt-10 space-y-2 ">
 
-    <div class="grid grid-cols-4  gap-6">
+    <div class="grid md:grid-cols-4 grid-cols-1  gap-6">
         @foreach($estates as $estate)
 
-            <div class="flex flex-col gap-3 ">
+            <div class="flex flex-col gap-3 cursor-pointer"  onclick="location.href='{{route('estate.show', $estate->id)}}'" >
                 <div class="relative">
                     <!-- component -->
-                    <div class=""
+                    <div class="group"
                          x-data="{ activeSlide: 1, slides: {{ count($estate->images) }} }">
                         <div class="relative">
                             <!-- Slides -->
@@ -15,14 +15,13 @@
                                     <img src="{{asset('storage/estates/'.$image->path)}}"
                                          alt=""
                                          class="w-full h-80 rounded-xl object-cover shadow-md">
-
                                 </div>
                             @endforeach
 
-                            <!-- Prev/Next arrow buttons -->
-                            <div class="box flex justify-between items-center mx-2 absolute inset-0">
-                                <button class="bg-white p-1 rounded-full"
-                                        x-on:click="activeSlide = activeSlide === 1 ? slides : activeSlide - 1">
+                            <!-- Prev/Next arrow buttons (hidden by default) -->
+                            <div class="box flex justify-between items-center mx-2 absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                <button class="bg-white p-1 rounded-full flex justify-center items-center"
+                                        x-on:click="activeSlide = activeSlide === 1 ? slides : activeSlide - 1" onclick="event.stopPropagation();">
 
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24"
@@ -32,8 +31,8 @@
                                         <path d="M15 6l-6 6l6 6"></path>
                                     </svg>
                                 </button>
-                                <button class="bg-white p-1 rounded-full"
-                                        x-on:click="activeSlide = activeSlide === slides ? 1 : activeSlide + 1">
+                                <button class="bg-white p-1 rounded-full flex justify-center items-center"
+                                        x-on:click="activeSlide = activeSlide === slides ? 1 : activeSlide + 1" onclick="event.stopPropagation();">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24"
                                          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -44,8 +43,6 @@
                                 </button>
                             </div>
                         </div>
-
-
                     </div>
 
                     <div class="absolute top-5 right-5">
