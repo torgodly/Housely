@@ -19,7 +19,7 @@ class Index extends Component
 
     public function render()
     {
-        $this->estates = Estate::with('images')->paginate($this->perPage);
+        $this->estates = Estate::with('images')->inRandomOrder()->paginate($this->perPage);
         $this->emit('userStore');
         return view('livewire.estate.index' , [
             'estates' => $this->estates
