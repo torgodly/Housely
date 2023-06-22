@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    $estates = \App\Models\Estate::with('images')->get();
+//    dd(json_encode($estates->first()->images));
+    return view('estate.index', compact('estates'));
+})->name('estate.index');
 
 Route::get('/dashboard', function () {
 

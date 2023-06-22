@@ -37,7 +37,6 @@
                 </div>
             </div>
         </div>
-
         <div class="!mt-6 grid grid-rows-2 grid-cols-4  rounded-xl overflow-clip  gap-2 relative" id="images">
             @foreach($estate->images->take(5) as $image)
                 <img src="{{asset('storage/estates/'.$image->path)}}" alt=""
@@ -237,6 +236,9 @@
             </div>
         </div>
         <x-footer></x-footer>
+
+        //pop up model div
+        <div
     </div>
     <style>
         #images > :first-child {

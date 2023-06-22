@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->text('description')->nullable();
             $table->boolean('status')->default(1);
             $table->string('company');
-            //TODO: add type of  estate rent or sale
+            //TODO: add  estate rent or sale boolean field
             $table->timestamps();
         });
     }

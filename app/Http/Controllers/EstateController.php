@@ -27,7 +27,7 @@ class EstateController extends Controller
         $filteredUtilities = $utilities->filter(function ($utility) use ($desiredUtilities) {
             return $desiredUtilities->contains($utility['name']);
         });
-        return view('Estate.show', compact('estate'));
+        return view('estate.show', compact('estate'));
     }
 
 }
