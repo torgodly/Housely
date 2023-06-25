@@ -21,4 +21,15 @@ class Estate extends Model
     {
         return $this->hasMany(Image::class);
     }
+
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
+    //check if this estate is favorite for this user
+    public function isFavorited()
+    {
+        return $this->favoritedBy()->where('user_id', auth()->id())->exists();
+    }
 }

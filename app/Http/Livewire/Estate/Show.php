@@ -6,8 +6,21 @@ use Livewire\Component;
 
 class Show extends Component
 {
+    public $estate;
+    public $utilities;
+
     public function render()
     {
-        return view('livewire.estate.show');
+        $this->utilities = $this->estate->utilities;
+
+        return view('livewire.estate.show', [
+            'estate' => $this->estate,
+            'utilities' => $this->utilities,]);
     }
+
+    public function favorite()
+    {
+        $this->estate->favoritedBy()->toggle(\Auth::user());
+    }
+
 }

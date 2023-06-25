@@ -30,4 +30,6 @@ class EstateController extends Controller
         return view('estate.show', compact('estate'));
     }
 
+
+
 }
