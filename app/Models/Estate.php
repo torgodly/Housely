@@ -32,4 +32,9 @@ class Estate extends Model
     {
         return $this->favoritedBy()->where('user_id', auth()->id())->exists();
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

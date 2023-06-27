@@ -8,6 +8,7 @@ class Show extends Component
 {
     public $estate;
     public $utilities;
+    public $ShowLogin=false;
 
     public function render()
     {
@@ -20,7 +21,29 @@ class Show extends Component
 
     public function favorite()
     {
+        if (!\Auth::check()) {
+            $this->ShowLogin=true;
+            return;
+        }
         $this->estate->favoritedBy()->toggle(\Auth::user());
     }
+
+    //order estate and
+    public function order()
+    {
+
+        if (!\Auth::check()) {
+            $this->ShowLogin=true;
+            return;
+        }
+        $order = $this->estate->orders()->create([
+            'order_number' => uniqid('order-', false),
+//            'phone_number' => \Auth::user()->phone_number,
+            'phone_number' => '0920000000',
+
+        ]);
+
+    }
+
 
 }

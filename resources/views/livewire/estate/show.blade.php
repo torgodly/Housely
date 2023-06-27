@@ -1,4 +1,5 @@
-<div class="max-w-6xl mx-auto  pt-10 space-y-2 relative" x-data="{ShowImages: false, ShowDescription: false , ShowUtilities: false}">
+<div class="max-w-6xl mx-auto  pt-10 space-y-2 relative" x-data="{ShowImages: false,
+ ShowDescription: false , ShowUtilities: false, ShowLogin: @entangle('ShowLogin')}">
     <h1 class="text-2xl font-bold pl-2">{{$estate->title}}</h1>
     <div class="flex justify-between items-center">
         <div class="flex justify-start items-center gap-2">
@@ -20,8 +21,10 @@
             </div>
             <div class="flex gap-2">
                 <div wire:click="favorite()" class="cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 {{$estate->isFavorited() ? 'fill-primary stroke-primary' : ''}}" viewBox="0 0 24 24" stroke-width="1"
-                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" >
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-5 h-5 {{$estate->isFavorited() ? 'fill-primary stroke-primary' : ''}}"
+                         viewBox="0 0 24 24" stroke-width="1"
+                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
                     </svg>
@@ -74,13 +77,17 @@
                         <h1 class="text-base font-bold capitalize text-center">{{__('Land Area')}}</h1>
                         <div
                             class="px-6 py-3 border border-black rounded-xl flex justify-center items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shovel" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shovel"
+                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M17 4l3 3"></path>
                                 <path d="M18.5 5.5l-8 8"></path>
-                                <path d="M8.276 11.284l4.44 4.44a.968 .968 0 0 1 0 1.369l-2.704 2.704a4.108 4.108 0 0 1 -5.809 -5.81l2.704 -2.703a.968 .968 0 0 1 1.37 0z"></path>
+                                <path
+                                    d="M8.276 11.284l4.44 4.44a.968 .968 0 0 1 0 1.369l-2.704 2.704a4.108 4.108 0 0 1 -5.809 -5.81l2.704 -2.703a.968 .968 0 0 1 1.37 0z"></path>
                             </svg>
-                            <span class="text-base font-bold capitalize">{{$estate->land_area}} {{__('square meters')}}</span>
+                            <span
+                                class="text-base font-bold capitalize">{{$estate->land_area}} {{__('square meters')}}</span>
                         </div>
                     </div>
 
@@ -89,9 +96,12 @@
 
                         <div
                             class="px-6 py-3 border border-black rounded-xl flex justify-center items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wall" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wall" width="24"
+                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                                <path
+                                    d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
                                 <path d="M4 8h16"></path>
                                 <path d="M20 12h-16"></path>
                                 <path d="M4 16h16"></path>
@@ -101,7 +111,8 @@
                                 <path d="M16 12v4"></path>
                                 <path d="M11 16v4"></path>
                             </svg>
-                            <span class="text-base font-bold capitalize">{{$estate->building_area}} {{__('square meters')}}</span>
+                            <span
+                                class="text-base font-bold capitalize">{{$estate->building_area}} {{__('square meters')}}</span>
                         </div>
                     </div>
 
@@ -109,9 +120,13 @@
                         <h1 class="text-base font-bold capitalize text-center">{{__('Floors')}}</h1>
                         <div
                             class="px-6 py-3 border border-black rounded-xl flex justify-center items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-community" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="icon icon-tabler icon-tabler-building-community" width="24" height="24"
+                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M8 9l5 5v7h-5v-4m0 4h-5v-7l5 -5m1 1v-6a1 1 0 0 1 1 -1h10a1 1 0 0 1 1 1v17h-8"></path>
+                                <path
+                                    d="M8 9l5 5v7h-5v-4m0 4h-5v-7l5 -5m1 1v-6a1 1 0 0 1 1 -1h10a1 1 0 0 1 1 1v17h-8"></path>
                                 <path d="M13 7l0 .01"></path>
                                 <path d="M17 7l0 .01"></path>
                                 <path d="M17 11l0 .01"></path>
@@ -161,7 +176,8 @@
                         </div>
                     @endforeach
                 </div>
-                <x-secondary-button @click="ShowUtilities = true" class="mt-6 rounded-xl !px-6 py-3 capitalize !text-sm !font-bold !border-black" >
+                <x-secondary-button @click="ShowUtilities = true"
+                                    class="mt-6 rounded-xl !px-6 py-3 capitalize !text-sm !font-bold !border-black">
                     {{__('Show all '.$estate->utilities->count().' utilities')}}
                 </x-secondary-button>
             </div>
@@ -183,19 +199,26 @@
                                       :value="1500"/>
                     </div>
                     <div class="flex flex-col gap-3 justify-center items-center">
-                        <x-primary-button
-                            class="w-full flex justify-center mt-4 h-12 capitalize !text-base !font-bold">
+                        <x-primary-button wire:click="order" wire:loading.attr="disabled"
+                                          wire:target="order"
+
+                                          class="w-full flex justify-center mt-4 h-12 capitalize !text-base !font-bold">
                             {{--                     TODO: there are diffrce between buy and rent--}}
 
-                            <div role="status">
-                                <svg aria-hidden="true" class="w-6 h-6 mr-2 text-white animate-spin  fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                            <div role="status" wire:loading>
+                                <svg aria-hidden="true" class="w-6 h-6 mr-2 text-white animate-spin  fill-blue-600"
+                                     viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                        fill="currentColor"/>
+                                    <path
+                                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                        fill="currentFill"/>
                                 </svg>
                                 <span class="sr-only">Loading...</span>
                             </div>
 
-                            {{__('Purchase')}}
+                            {{__('Order')}}
 
                         </x-primary-button>
                         <h1 class="font-thin text-sm text-gray-500">
@@ -353,6 +376,87 @@
                         @endforeach
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relative z-10" style="display: none" x-show="ShowLogin"
+    >
+
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div
+                    class="relative transform   rounded-lg bg-gray-100 px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-lg md:max-w-7xl sm:p-6 max-h-[90vh] ">
+                    <div class=" sticky top-0  px-4 py-1 flex justify-end items-center  ">
+                        <button type="button"
+                                class="rounded-md bg-primary text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-md"
+                                @click="ShowLogin = false">
+                            <span class="sr-only">Close</span>
+                            <svg class="h-6 w-6 stroke-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+
+                    </div>
+                    <div class=" h-fit py-10 flex flex-col justify-center items-center  ">
+                        <div>
+                            <a href="/">
+                                <x-application-logo class="w-20 h-20 fill-current text-gray-500"/>
+                            </a>
+                        </div>
+
+                        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+
+                                <!-- Email Address -->
+                                <div>
+                                    <x-input-label for="email" :value="__('Email')"/>
+                                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
+                                                  :value="old('email')" required autofocus autocomplete="username"/>
+                                    <x-input-error :messages="$errors->get('email')" class="mt-2"/>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="mt-4">
+                                    <x-input-label for="password" :value="__('Password')"/>
+
+                                    <x-text-input id="password" class="block mt-1 w-full"
+                                                  type="password"
+                                                  name="password"
+                                                  required autocomplete="current-password"/>
+
+                                    <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+                                </div>
+
+                                <!-- Remember Me -->
+                                <div class="block mt-4">
+                                    <label for="remember_me" class="inline-flex items-center">
+                                        <input id="remember_me" type="checkbox"
+                                               class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                                               name="remember">
+                                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center justify-end mt-4">
+                                    @if (Route::has('password.request'))
+                                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                           href="{{ route('password.request') }}">
+                                            {{ __('Forgot your password?') }}
+                                        </a>
+                                    @endif
+
+                                    <x-primary-button class="ml-3">
+                                        {{ __('Log in') }}
+                                    </x-primary-button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
