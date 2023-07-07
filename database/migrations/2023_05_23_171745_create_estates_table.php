@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('lat');
             $table->integer('price');
             $table->float('discount')->nullable();
-            $table->float('commission')->nullable();
+            $table->float('commission')->default(0);
             $table->integer('floors')->nullable();
             $table->integer('year_built')->nullable();
             $table->text('description')->nullable();
