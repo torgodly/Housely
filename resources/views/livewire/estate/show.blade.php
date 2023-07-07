@@ -231,12 +231,14 @@
                                 {{__('Estate Price')}}</h1>
                             <h1 class="font-thin text-base text-gray-500">${{number_format($estate->price)}}</h1>
                         </div>
-                        <div class="flex justify-between items-baseline gap-32 mt-4">
-                            <h1 class="font-thin text-base text-gray-500 underline underline-offset-1 decoration-1">
-                                {{$estate->discount}}% discount</h1>
-                            <h1 class="font-thin text-base text-green-500">
-                                -${{ number_format($estate->price * ($estate->discount / 100)) }}</h1>
-                        </div>
+                        @if(isset($estate->discount))
+                            <div class="flex justify-between items-baseline gap-32 mt-4">
+                                <h1 class="font-thin text-base text-gray-500 underline underline-offset-1 decoration-1">
+                                    {{$estate->discount}}% discount</h1>
+                                <h1 class="font-thin text-base text-green-500">
+                                    -${{ number_format($estate->price * ($estate->discount / 100)) }}</h1>
+                            </div>
+                        @endif
                         <div class="flex justify-between items-baseline gap-32 mt-4">
                             <h1 class="font-thin text-base text-gray-500 underline underline-offset-1 decoration-1">
                                 {{$estate->commission}}% commission</h1>
@@ -353,29 +355,25 @@
 
         <div class="fixed inset-0 z-10 overflow-y-auto">
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <div
-                    class="relative transform overflow-y-scroll  rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-lg md:max-w-7xl sm:p-6 max-h-[90vh] ">
-                    <div class=" sticky top-0  px-4 py-1 flex justify-end items-center  ">
-                        <button type="button"
-                                class="rounded-md bg-primary text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-md"
-                                @click="ShowUtilities = false">
+                <div class="relative transform overflow-y-scroll rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-lg md:max-w-7xl sm:p-6 max-h-[90vh]">
+                    <div class="sticky top-0 px-4 py-1 flex justify-end items-center">
+                        <button type="button" class="rounded-md bg-primary text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-md" @click="ShowUtilities = false">
                             <span class="sr-only">Close</span>
-                            <svg class="h-6 w-6 stroke-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                 stroke="currentColor" aria-hidden="true">
+                            <svg class="h-6 w-6 stroke-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
                         </button>
                     </div>
-                    <div class="flex flex-col justify-start items-center gap-2">
+                    <ul class="mt-4 space-y-2">
                         @foreach($estate->utilities as $utility)
-                            <p class="text-[18px] font-thin text-black capitalize">
-                                {{$utility->name}}
-                                <span class="text-base text-gray-800 lowercase">x {{$utility->quantity}}</span>
-
-                            </p>
+                            <li>
+                                <div class="flex items-center">
+                                    <span class="text-lg font-semibold text-black capitalize">{{ $utility->name }}</span>
+                                    <span class="text-gray-800 ml-2">x {{ $utility->quantity }}</span>
+                                </div>
+                            </li>
                         @endforeach
-                    </div>
-
+                    </ul>
                 </div>
             </div>
         </div>
