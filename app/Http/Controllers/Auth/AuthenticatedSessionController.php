@@ -29,7 +29,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+
+//        TODO: fix this if user loged in from the login page
+        if (Auth::user()->role == 'admin') {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+        return redirect()->back();
     }
 
     /**
