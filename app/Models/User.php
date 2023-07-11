@@ -50,4 +50,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Estate::class, 'favorites')->withTimestamps();
     }
 
+    //is admin
+    public function getIsAdminAttribute()
+    {
+        return $this->role === 'admin';
+    }
+
 }

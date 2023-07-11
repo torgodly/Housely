@@ -188,10 +188,8 @@
                     class="max-w-sm bg-white border border-gray-200 rounded-lg shadow  p-6 flex flex-col justify-center text-center drop-shadow-xl">
                     <div class="flex justify-between items-baseline gap-32">
                         <h1 id="sss" class="text-2xl font-bold ">${{number_format($estate->price)}}</h1>
-                        <h1 class="text-base font-bold underline text-gray-500">2 reviews</h1>
+                        <h1 class="text-base font-bold underline text-gray-500">{{$estate->favoritedBy()->count()}} favorites</h1>
                     </div>
-                    {{--   TODO: add gusts              --}}
-
                     <div>
                         <x-input-label for="offer" :value="__('Place An Offer')"/>
                         <x-text-input id="offer" name="offer" type="text" class="mt-1 block w-full"
@@ -203,8 +201,6 @@
                                           wire:target="order"
 
                                           class="w-full flex justify-center mt-4 h-12 capitalize !text-base !font-bold">
-                            {{--                     TODO: there are diffrce between buy and rent--}}
-
                             <div role="status" wire:loading>
                                 <svg aria-hidden="true" class="w-6 h-6 mr-2 text-white animate-spin  fill-blue-600"
                                      viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

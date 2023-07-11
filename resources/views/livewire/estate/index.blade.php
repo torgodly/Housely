@@ -14,6 +14,7 @@
                 </svg>
                 filter
             </x-secondary-button>
+
         </div>
     </div>
     <div class="grid md:grid-cols-4 grid-cols-1  gap-6">
@@ -88,7 +89,7 @@
             }
         };
     </script>
-    <div class="relative z-10" x-show="true">
+    <div class="relative z-10" x-show="ShowFilter" style="display: none">
         <!-- Background Overlay -->
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
@@ -103,7 +104,7 @@
                         <div class="sticky top-0 px-4 py-1 flex justify-end items-center">
                             <button type="button"
                                     class="rounded-md bg-primary text-white hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-md"
-                                    @click="showFilter = false">
+                                    @click="ShowFilter = false">
                                 <span class="sr-only">Close</span>
                                 <svg class="h-6 w-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -119,12 +120,12 @@
                             <div class="flex gap-2 justify-between">
                                 <div class="w-full">
                                     <x-input-label for="minPrice" :value="__('Minimum Price')"/>
-                                    <x-text-input class="w-full" type="number" id="minPrice" name="minPrice"
+                                    <x-text-input class="w-full" type="number" id="minPrice" name="minPrice" wire:model="MaxPrice"
                                                   placeholder="{{__('From')}}"/>
                                 </div>
                                 <div class="w-full">
                                     <x-input-label for="maxPrice" :value="__('Maximum Price')"/>
-                                    <x-text-input class="w-full" type="number" id="maxPrice" name="maxPrice"
+                                    <x-text-input class="w-full" type="number" id="maxPrice" name="maxPrice" wire:model="MinPrice"
                                                   placeholder="{{__('TO')}}"/>
                                 </div>
                             </div>
@@ -140,12 +141,12 @@
                             <div class="flex gap-2 justify-between">
                                 <div class="w-full">
                                     <x-input-label for="minArea" :value="__('Minimum Area')"/>
-                                    <x-text-input class="w-full" type="number" id="minArea" name="minArea"
+                                    <x-text-input class="w-full" type="number" id="minArea" name="minArea" wire:model="MaxArea"
                                                   placeholder="{{__('From')}}"/>
                                 </div>
                                 <div class="w-full">
                                     <x-input-label for="maxArea" :value="__('Maximum Area')"/>
-                                    <x-text-input class="w-full" type="number" id="maxArea" name="maxArea"
+                                    <x-text-input class="w-full" type="number" id="maxArea" name="maxArea" wire:model="MinArea"
                                                   placeholder="{{__('TO')}}"/>
                                 </div>
                             </div>
@@ -161,43 +162,43 @@
                             <div class="flex flex-col gap-5 justify-between ">
                                 <div class="w-full space-y-3">
                                     <x-input-label :value="__('Bedrooms')"/>
-                                    <x-secondary-button
-
-                                        class=" rounded-xl  capitalize !text-sm !font-bold !border-black {{$Rooms == null ? '!bg-gray-800 text-white ' : ''}}">
-                                        {{__('Any')}}
-                                    </x-secondary-button>
-                                    <x-secondary-button
-                                        class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center">
-                                        {{__('1')}}
-                                    </x-secondary-button>
-                                    <x-secondary-button
-                                        class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center">
-                                        {{__('2')}}
-                                    </x-secondary-button>
-                                    <x-secondary-button
-                                        class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center">
-                                        {{__('3')}}
-                                    </x-secondary-button>
-                                    <x-secondary-button
-                                        class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center">
-                                        {{__('4')}}
-                                    </x-secondary-button>
-                                    <x-secondary-button
-                                        class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center">
-                                        {{__('5')}}
-                                    </x-secondary-button>
-                                    <x-secondary-button
-                                        class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center">
-                                        {{__('6')}}
-                                    </x-secondary-button>
-                                    <x-secondary-button
-                                        class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center">
-                                        {{__('7')}}
-                                    </x-secondary-button>
-                                    <x-secondary-button
-                                        class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center">
-                                        {{__('8+')}}
-                                    </x-secondary-button>
+                                    {{$Rooms}}
+                                        <x-secondary-button  wire:click="setRooms(null)"
+                                            class=" rounded-xl  capitalize !text-sm !font-bold !border-black {{$Rooms == null ? '!bg-gray-800 text-white ' : ''}}">
+                                            {{__('Any')}}
+                                        </x-secondary-button>
+                                        <x-secondary-button wire:click="$set('Rooms', '1')"
+                                            class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center {{$Rooms == 1 ? '!bg-gray-800 text-white ' : ''}}">
+                                            {{__('1')}}
+                                        </x-secondary-button>
+                                        <x-secondary-button wire:click="setRooms(2)"
+                                            class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center {{$Rooms == 2 ? '!bg-gray-800 text-white ' : ''}}">
+                                            {{__('2')}}
+                                        </x-secondary-button>
+                                        <x-secondary-button wire:click="setRooms(3)"
+                                            class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center {{$Rooms == 3 ? '!bg-gray-800 text-white ' : ''}}">
+                                            {{__('3')}}
+                                        </x-secondary-button>
+                                        <x-secondary-button wire:click="setRooms(4)"
+                                            class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center {{$Rooms == 4 ? '!bg-gray-800 text-white ' : ''}}">
+                                            {{__('4')}}
+                                        </x-secondary-button>
+                                        <x-secondary-button wire:click="setRooms(5)"
+                                            class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center {{$Rooms == 5 ? '!bg-gray-800 text-white ' : ''}}">
+                                            {{__('5')}}
+                                        </x-secondary-button>
+                                        <x-secondary-button wire:click="setRooms(6)"
+                                            class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center {{$Rooms == 6 ? '!bg-gray-800 text-white ' : ''}}">
+                                            {{__('6')}}
+                                        </x-secondary-button>
+                                        <x-secondary-button wire:click="setRooms(7)"
+                                            class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center {{$Rooms == 7 ? '!bg-gray-800 text-white ' : ''}}">
+                                            {{__('7')}}
+                                        </x-secondary-button>
+                                        <x-secondary-button wire:click="setRooms(8)"
+                                            class=" rounded-xl  capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center {{$Rooms == 8 ? '!bg-gray-800 text-white ' : ''}}">
+                                            {{__('8+')}}
+                                        </x-secondary-button>
                                 </div>
                                 <div class="w-full space-y-3">
                                     <x-input-label :value="__('Bathroom')"/>
@@ -344,7 +345,7 @@
                                 <div class="grid grid-cols-2 gap-y-7">
                                     @foreach($Utilities as $Utility)
                                         <div class="flex gap-5 items-center justify-start">
-                                            <x-text-input class="w-6 h-6" type="checkbox" name="air_conditioning" :value="$Utility->id"
+                                            <x-text-input class="w-6 h-6" type="checkbox" name="air_conditioning" :value="$Utility->id" wire:model="SelectedUtilities"
                                                           id="air_conditioning" placeholder="Air conditioning"/>
                                             <x-input-label class="!text-base" :value="__($Utility->name)"/>
 
