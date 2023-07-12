@@ -31,10 +31,16 @@ class DatabaseSeeder extends Seeder
 
 
 //
-         \App\Models\User::factory()->create([
-             'name' => 'Test User',
-             'email' => 'admin@admin.com',
-             'phone_number' => '0920000000',
-         ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@admin.com',
+            'phone_number' => '0920000000',
+            'role' => 'admin',
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'user@user.com',
+            'phone_number' => '0920000000',
+        ]);
     }
 }

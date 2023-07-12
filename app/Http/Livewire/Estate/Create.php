@@ -22,6 +22,12 @@ class Create extends Component
     public $price;
     public $longitude;
     public $latitude;
+    public $title;
+    public $discount;
+    public $commission;
+    public $company;
+    public $floors;
+    public $description;
     public $utilities = [];
     public $images = [];
 
@@ -46,6 +52,16 @@ class Create extends Component
 //        dd($this->price);
         if ($this->step == 1) {
             $this->validate([
+                'title' => 'required',
+                'company' => 'required',
+                'discount' => 'required',
+                'commission' => 'required',
+                'floors' => 'required',
+                'description' => 'required',
+            ]);
+        }
+        if ($this->step == 2) {
+            $this->validate([
                 'type' => 'required',
                 'address' => 'required',
                 'city' => 'required',
@@ -55,19 +71,19 @@ class Create extends Component
                 'price' => 'required',
             ]);
         }
-        if ($this->step == 2) {
+        if ($this->step == 3) {
             $this->validate([
                 'utilities' => 'required',
                 'utilities.*.quantity' => 'required|numeric|min:1',
             ]);
         }
-        if ($this->step == 3) {
+        if ($this->step == 4) {
             $this->validate([
                 'longitude' => 'required',
                 'latitude' => 'required',
             ]);
         }
-        if ($this->step == 4) {
+        if ($this->step == 5) {
             $this->validate([
                 'images.*' => 'required|image|max:1024', // 1MB Max
             ]);
@@ -92,7 +108,12 @@ class Create extends Component
     {
         // Add your code to save the estate here
         $estate = Estate::create([
+            'title' => $this->title,
+            'company' => $this->company,
             'type' => $this->type,
+            'floors' => $this->floors,
+            'commission' => $this->commission,
+            'discount' => $this->discount,
             'address' => $this->address,
             'city' => $this->city,
             'country' => $this->country,
@@ -101,6 +122,7 @@ class Create extends Component
             'price' => $this->price,
             'long' => $this->longitude,
             'lat' => $this->latitude,
+            'description' => $this->description,
         ]);
         //save utilities
         $estate->utilities()->attach($this->utilities);

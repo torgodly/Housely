@@ -4,7 +4,7 @@
 
         <div class="relative p-4 sm:p-8 bg-white shadow sm:rounded-lg absolute">
 
-            <x-steps steps="4" current="{{$step}}"></x-steps>
+            <x-steps steps="5" current="{{$step}}"></x-steps>
 
             <div class="max-w-full">
 
@@ -16,6 +16,62 @@
                     </header>
                     <div class="mt-6 space-y-6">
                         <div class="{{ $step != 1 ? 'hidden' : '' }} max-w-xl">
+                            <div>
+                                <x-input-label for="title" :value="__('Estate title')"/>
+
+                                <x-text-input id="title" name="title" type="text" class="mt-1 block w-full"
+                                              wire:model="title"
+                                              autocomplete="title"/>
+                                <x-input-error :messages="$errors->get('title')"
+                                               class="mt-2"/>
+                            </div>
+                            <div>
+                                <x-input-label for="company" :value="__('Estate company')"/>
+
+                                <x-text-input id="company" name="company" type="text" class="mt-1 block w-full"
+                                              wire:model="company"
+                                              autocomplete="company"/>
+                                <x-input-error :messages="$errors->get('company')"
+                                               class="mt-2"/>
+                            </div>
+                            <div>
+                                <x-input-label for="discount" :value="__('price discount')"/>
+
+                                <x-text-input id="discount" name="discount" type="number" class="mt-1 block w-full"
+                                              wire:model="discount"
+                                              autocomplete="discount"/>
+                                <x-input-error :messages="$errors->get('discount')"
+                                               class="mt-2"/>
+                            </div>
+                            <div>
+                                <x-input-label for="commission" :value="__('price commission')"/>
+
+                                <x-text-input id="commission" name="commission" type="number" class="mt-1 block w-full"
+                                              wire:model="commission"
+                                              autocomplete="commission"/>
+                                <x-input-error :messages="$errors->get('commission')"
+                                               class="mt-2"/>
+                            </div>
+                            <div>
+                                <x-input-label for="floors" :value="__('Estate Floors')"/>
+
+                                <x-text-input id="floors" name="floors" type="number" class="mt-1 block w-full"
+                                              wire:model="floors"
+                                              autocomplete="floors"/>
+                                <x-input-error :messages="$errors->get('floors')"
+                                               class="mt-2"/>
+                            </div>
+                            <div>
+                                <x-input-label for="description" :value="__('Estate description')"/>
+
+
+                                <textarea name="description" wire:model="description"
+                                          id="" cols="30" rows="10"></textarea>
+                                <x-input-error :messages="$errors->get('description')"
+                                               class="mt-2"/>
+                            </div>
+                        </div>
+                        <div class="{{ $step != 2 ? 'hidden' : '' }} max-w-xl">
                             <div>
                                 <x-input-label for="type" :value="__('Estate Type')"/>
 
@@ -74,7 +130,7 @@
                             </div>
 
                         </div>
-                        <div class="{{ $step != 2 ? 'hidden' : '' }}">
+                        <div class="{{ $step != 3 ? 'hidden' : '' }}">
                             <div class="">
                                 <div class="py-12">
                                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -148,7 +204,7 @@
 
 
                         </div>
-                        <div class="{{ $step != 3 ? 'hidden' : '' }}">
+                        <div class="{{ $step != 4 ? 'hidden' : '' }}">
                             <div class="" wire:ignore>
 
                                 <div id="map" style="width:100%; height:400px;"></div>
@@ -159,7 +215,7 @@
 
 
                         </div>
-                        <div class="{{ $step != 4 ? 'hidden' : '' }}">
+                        <div class="{{ $step != 5 ? 'hidden' : '' }}">
                             <div class="" wire:ignore>
 
                                 <div class="mb-4">
@@ -178,11 +234,9 @@
 
 
                         </div>
-
-
                         <div class="flex items-center justify-between flex-row-reverse gap-4">
-                            @if($step != 4)
-                                <x-primary-button wire:click="nextStep" disabled="{{ $step == 4 }}"
+                            @if($step != 5)
+                                <x-primary-button wire:click="nextStep" disabled="{{ $step == 5 }}"
                                                   type="button">{{ __('Next') }}</x-primary-button>
                                 <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
                                                   type="button">{{ __('prev') }}</x-primary-button>

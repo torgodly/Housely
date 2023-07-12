@@ -44,7 +44,7 @@ class EstateFactory extends Factory
             'lat' => $this->faker->latitude(),
             'description' => $this->faker->paragraph(3),
             'floors' => $this->faker->numberBetween(1, 10),
-            'year_built' => $this->faker->numberBetween(1990, 2021),
+//            'year_built' => $this->faker->numberBetween(1990, 2021),
             'discount' => $this->faker->numberBetween(1, 10),
             'commission' => $this->faker->numberBetween(1, 10),
             'company' => $this->faker->company(),
