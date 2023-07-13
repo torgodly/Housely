@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
         Estate::factory(100)->create()->each(function ($estate) {
             $utilities = Utility::all()->random(5)->pluck('id');
             $estate->utilities()->attach($utilities, ['quantity' => rand(1, 8)]);
-//            $images = \App\Models\Image::factory(5)->create(
-//                [
-//                    'estate_id' => $estate->id,
-//
-//                ]
-//            );
+            $images = \App\Models\Image::factory(5)->create(
+                [
+                    'estate_id' => $estate->id,
+
+                ]
+            );
         });
 
 
