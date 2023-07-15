@@ -10,11 +10,14 @@ class Index extends Component
 {
     public $perPage = 12;
     protected $estates;
-    public $MaxPrice;
-    public $MinPrice;
-    public $MinArea;
-    public $MaxArea;
-    public $Rooms = null;
+    public $MinPrice = null;
+    public $MaxPrice= null;
+    public $MinArea =null;
+    public $MaxArea = null;
+    public $BedRooms = null;
+    public $BathRooms = null;
+    public $Floors = null;
+    public $Type = null;
     public $Utilities;
     public $SelectedUtilities = [];
     protected $listeners = [
@@ -22,11 +25,17 @@ class Index extends Component
     ];
 //add all qery string to url
     protected $queryString = [
-        'MaxPrice' => ['except' => ''],
         'MinPrice' => ['except' => ''],
-        'Rooms' => ['except' => ''],
+        'MaxPrice' => ['except' => ''],
+        'MaxArea' => ['except' => ''],
+        'MinArea' => ['except' => ''],
+        'BedRooms' => ['except' => ''],
+        'BathRooms' => ['except' => ''],
+        'Floors' => ['except' => ''],
+        'Type' => ['except' => ''],
         'SelectedUtilities' => ['except' => []],
     ];
+
     public function loadMore()
     {
         $this->perPage = $this->perPage + 12;
@@ -35,13 +44,40 @@ class Index extends Component
     public function render()
     {
         $this->Utilities = Utility::all();
-        if (!$this->estates) {
-            $this->estates = Estate::with('images')->inRandomOrder()->paginate($this->perPage);
-            $this->emit('userStore');
-        }
+        $this->estates = Estate::with('images')->wherePrice($this->MinPrice, $this->MaxPrice)->whereArea($this->MinArea, $this->MaxArea)->get();
+//        dd($this->estates);
         return view('livewire.estate.index', [
             'estates' => $this->estates
         ]);
+    }
+
+    //set bed rooms
+    public function setBedRooms($value)
+    {
+        $this->BedRooms = $value;
+    }
+
+    //set bathrooms
+    public function setBathRooms($value)
+    {
+        $this->BathRooms = $value;
+    }
+
+    //floots
+
+    public function setFloors($value)
+    {
+        $this->Floors = $value;
+    }
+
+    public function setType($value)
+    {
+        $this->Type = $value;
+    }
+
+    public function resetFilter()
+    {
+        $this->reset('MinArea','MaxArea','MinPrice','MaxPrice','Type','Floors','BathRooms','BedRooms','SelectedUtilities');
     }
 
 
