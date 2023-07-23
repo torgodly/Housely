@@ -11,14 +11,16 @@ class Index extends Component
     public $perPage = 12;
     protected $estates;
     public $MinPrice = null;
-    public $MaxPrice= null;
-    public $MinArea =null;
+    public $MaxPrice = null;
+    public $MinArea = null;
     public $MaxArea = null;
     public $BedRooms = null;
     public $BathRooms = null;
     public $Floors = null;
     public $Type = null;
     public $Utilities;
+    public $ResultsCount;
+    protected $FilteredEstates = null;
     public $SelectedUtilities = [];
     protected $listeners = [
         'load-more' => 'loadMore'
@@ -41,11 +43,38 @@ class Index extends Component
         $this->perPage = $this->perPage + 12;
     }
 
+    public function mount()
+    {
+
+        //check if any of the query string is not null
+        if ($this->MinPrice != null || $this->MaxPrice != null || $this->MinArea != null || $this->MaxArea != null || $this->BedRooms != null || $this->BathRooms != null || $this->Floors != null || $this->Type != null || $this->SelectedUtilities != null) {
+            $this->ResultsCount = Estate::with('images')
+                ->wherePrice($this->MinPrice, $this->MaxPrice)
+                ->whereArea($this->MinArea, $this->MaxArea)
+                ->whereBedroom($this->BedRooms)
+                ->whereBathroom($this->BathRooms)
+                ->whereFloors($this->Floors)
+                ->whereNoCommission(null)
+                ->whereDiscount(null)
+                ->whereCity(null)
+                ->whereCountry(null)
+                ->whereType($this->Type)
+                ->whereUtilities($this->SelectedUtilities)
+                ->count();
+            $this->applyFilters();
+        }
+
+
+    }
+
     public function render()
     {
+        if ($this->FilteredEstates != null) {
+            $this->estates = $this->FilteredEstates;
+        } else {
+            $this->estates = Estate::with('images')->paginate($this->perPage);
+        }
         $this->Utilities = Utility::all();
-        $this->estates = Estate::with('images')->wherePrice($this->MinPrice, $this->MaxPrice)->whereArea($this->MinArea, $this->MaxArea)->get();
-//        dd($this->estates);
         return view('livewire.estate.index', [
             'estates' => $this->estates
         ]);
@@ -54,30 +83,53 @@ class Index extends Component
     //set bed rooms
     public function setBedRooms($value)
     {
+
         $this->BedRooms = $value;
     }
 
-    //set bathrooms
-    public function setBathRooms($value)
-    {
-        $this->BathRooms = $value;
-    }
 
-    //floots
-
-    public function setFloors($value)
-    {
-        $this->Floors = $value;
-    }
-
-    public function setType($value)
-    {
-        $this->Type = $value;
-    }
 
     public function resetFilter()
     {
-        $this->reset('MinArea','MaxArea','MinPrice','MaxPrice','Type','Floors','BathRooms','BedRooms','SelectedUtilities');
+        $this->reset('MinArea', 'MaxArea', 'MinPrice', 'MaxPrice', 'Type', 'Floors', 'BathRooms', 'BedRooms', 'SelectedUtilities');
+    }
+
+    //when any of the filter properties change  get the result count
+    public function updated($propertyName)
+    {
+//        dd($propertyName);
+        $this->ResultsCount = Estate::with('images')
+            ->wherePrice($this->MinPrice, $this->MaxPrice)
+            ->whereArea($this->MinArea, $this->MaxArea)
+            ->whereBedroom($this->BedRooms)
+            ->whereBathroom($this->BathRooms)
+            ->whereFloors($this->Floors)
+            ->whereNoCommission(null)
+            ->whereDiscount(null)
+            ->whereCity(null)
+            ->whereCountry(null)
+            ->whereType($this->Type)
+            ->whereUtilities($this->SelectedUtilities)
+            ->count();
+    }
+
+    public function applyFilters()
+    {
+
+        $this->FilteredEstates = Estate::with('images')
+            ->wherePrice($this->MinPrice, $this->MaxPrice)
+            ->whereArea($this->MinArea, $this->MaxArea)
+            ->whereBedroom($this->BedRooms)
+            ->whereBathroom($this->BathRooms)
+            ->whereFloors($this->Floors)
+            ->whereNoCommission(null)
+            ->whereDiscount(null)
+            ->whereCity(null)
+            ->whereCountry(null)
+            ->whereType($this->Type)
+            ->whereUtilities($this->SelectedUtilities)
+            ->get();
+
     }
 
 

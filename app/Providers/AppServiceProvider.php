@@ -29,6 +29,58 @@ class AppServiceProvider extends ServiceProvider
             return $MinArea != null && $MaxArea != null ? $this->whereBetween('land_area', [$MinArea, $MaxArea]) : $this;
         });
 
+        //create macro to get all estates with utility named Bedroom and has qunaity of 3
+        Builder::macro('whereBedroom', function ($bedroom) {
+            return $bedroom != null ? $this->whereHas('utilities', function ($query) use ($bedroom) {
+                $query->where('name', 'Bedroom')->where('quantity', $bedroom);
+            }) : $this;
+        });
+
+        //create macro to get all estates with utility named Bathroom and has qunaity of 3
+        Builder::macro('whereBathroom', function ($bathroom) {
+            return $bathroom != null ? $this->whereHas('utilities', function ($query) use ($bathroom) {
+                $query->where('name', 'Bathroom')->where('quantity', $bathroom);
+            }) : $this;
+        });
+
+        //create macro to get estates with no commission
+        Builder::macro('whereNoCommission', function ($noCommission) {
+            return $noCommission != null ? $this->where('commission', 0) : $this;
+        });
+        //create macro to get estates with  discount
+        Builder::macro('whereDiscount', function ($discount) {
+            return $discount != null ? $this->where('discount', '>', 0) : $this;
+        });
+
+        //create macro to get estates with  floors count
+        Builder::macro('whereFloors', function ($floors) {
+            return $floors != null ? $this->where('floors', $floors) : $this;
+        });
+
+
+        //create macro to get estates with  Type
+        Builder::macro('whereType', function ($type) {
+            return $type != null ? $this->where('type', $type) : $this;
+        });
+
+        //create macro to get estates that hass the givien utlitys ids
+        Builder::macro('whereUtilities', function ($utilities) {
+            return $utilities != null ? $this->whereHas('utilities', function ($query) use ($utilities) {
+                $query->whereIn('utility_id', $utilities);
+            }) : $this;
+        });
+
+        //create macro to get estates by given city
+        Builder::macro('whereCity', function ($city) {
+            return $city != null ? $this->where('city', $city) : $this;
+        });
+
+        //create macro to get estates by given Country
+        Builder::macro('whereCountry', function ($country) {
+            return $country != null ? $this->where('country', $country) : $this;
+        });
+
+
 
     }
 }

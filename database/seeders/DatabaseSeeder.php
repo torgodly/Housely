@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         Utility::factory(8)->create();
 
         //create 10 estate and attach 5 utilities to each one with random quantity
-        Estate::factory(100)->create()->each(function ($estate) {
+        Estate::factory(10)->create()->each(function ($estate) {
             $utilities = Utility::all()->random(5)->pluck('id');
             $estate->utilities()->attach($utilities, ['quantity' => rand(1, 8)]);
             $images = \App\Models\Image::factory(5)->create(
