@@ -48,6 +48,9 @@ class EstateFactory extends Factory
             'discount' => $this->faker->numberBetween(1, 10),
             'commission' => $this->faker->numberBetween(1, 10),
             'company' => $this->faker->company(),
+            'bedrooms' => $this->faker->numberBetween(1, 10),
+            'bathrooms' => $this->faker->numberBetween(1, 10),
+
 
         ];
     }

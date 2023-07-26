@@ -10,7 +10,7 @@ class Estate extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $with = ['utilities:id,name,estate_utility.quantity', 'images'];
+//    protected $with = ['utilities:id,name,estate_utility.quantity', 'images'];
 
     public function utilities()
     {

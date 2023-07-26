@@ -24,11 +24,14 @@ return new class extends Migration {
             $table->integer('price');
             $table->float('discount')->nullable();
             $table->float('commission')->default(0);
-            $table->integer('floors')->nullable();
+            $table->integer('floors')->default(0);
+            $table->integer('bedrooms')->default(0);
+            $table->integer('bathrooms')->default(0);
             $table->text('description')->nullable();
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(0);
             $table->string('company');
             //TODO: add  estate rent or sale boolean field
+
 
             $table->timestamps();
         });

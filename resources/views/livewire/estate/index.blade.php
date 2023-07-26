@@ -18,66 +18,70 @@
         </div>
     </div>
     <div class="grid md:grid-cols-4 grid-cols-1  gap-6 ">
-        @foreach($estates as $estate)
-            <div class="flex flex-col gap-3 cursor-pointer"
-                 onclick="location.href='{{route('estate.show', $estate->id)}}'">
-                <div class="relative">
-                    <!-- component -->
-                    <div class="group"
-                         x-data="{ activeSlide: 1, slides: {{ count($estate->images) }} }">
-                        <div class="relative">
-                            <!-- Slides -->
-                            @foreach($estate->images as $key => $image)
-                                <div x-show="activeSlide === {{ $key + 1 }}">
-                                    <img src="{{asset('storage/estates/'.$image->path)}}"
-                                         alt=""
-                                         class="w-full h-80 rounded-xl object-cover shadow-md">
+{{--        //cechk if $estates is not null--}}
+        @if(isset($estates))
+            @foreach($estates as $estate)
+                <div class="flex flex-col gap-3 cursor-pointer"
+                     onclick="location.href='{{route('estate.show', $estate->id)}}'">
+                    <div class="relative">
+                        <!-- component -->
+                        <div class="group"
+                             x-data="{ activeSlide: 1, slides: {{ count($estate->images) }} }">
+                            <div class="relative">
+                                <!-- Slides -->
+                                @foreach($estate->images as $key => $image)
+                                    <div x-show="activeSlide === {{ $key + 1 }}">
+                                        <img src="{{asset('storage/estates/'.$image->path)}}"
+                                             alt=""
+                                             class="w-full h-80 rounded-xl object-cover shadow-md">
+                                    </div>
+                                @endforeach
+
+                                <!-- Prev/Next arrow buttons (hidden by default) -->
+                                <div
+                                    class="box flex justify-between items-center mx-2 absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <button class="bg-white p-1 rounded-full flex justify-center items-center"
+                                            x-on:click="activeSlide = activeSlide === 1 ? slides : activeSlide - 1"
+                                            onclick="event.stopPropagation();">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24"
+                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                             stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M15 6l-6 6l6 6"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="bg-white p-1 rounded-full flex justify-center items-center"
+                                            x-on:click="activeSlide = activeSlide === slides ? 1 : activeSlide + 1"
+                                            onclick="event.stopPropagation();">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24"
+                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                             stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M9 6l6 6l-6 6"></path>
+                                        </svg>
+                                    </button>
                                 </div>
-                            @endforeach
-
-                            <!-- Prev/Next arrow buttons (hidden by default) -->
-                            <div
-                                class="box flex justify-between items-center mx-2 absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                <button class="bg-white p-1 rounded-full flex justify-center items-center"
-                                        x-on:click="activeSlide = activeSlide === 1 ? slides : activeSlide - 1"
-                                        onclick="event.stopPropagation();">
-
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24"
-                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                         stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M15 6l-6 6l6 6"></path>
-                                    </svg>
-                                </button>
-                                <button class="bg-white p-1 rounded-full flex justify-center items-center"
-                                        x-on:click="activeSlide = activeSlide === slides ? 1 : activeSlide + 1"
-                                        onclick="event.stopPropagation();">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24"
-                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                         stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M9 6l6 6l-6 6"></path>
-                                    </svg>
-                                </button>
                             </div>
                         </div>
+
                     </div>
 
+                    <div>
+                        <h1 class="text-base font-bold">
+                            {{ $estate->title}}
+                        </h1>
+                        <h1 class="font-thin text-base text-gray-500 ">
+                            {{ $estate->address}}
+                        </h1>
+                        <h1 class="text-base font-bold ">${{number_format($estate->price)}}</h1>
+                    </div>
                 </div>
+            @endforeach
 
-                <div>
-                    <h1 class="text-base font-bold">
-                        {{ $estate->title}}
-                    </h1>
-                    <h1 class="font-thin text-base text-gray-500 ">
-                        {{ $estate->address}}
-                    </h1>
-                    <h1 class="text-base font-bold ">${{number_format($estate->price)}}</h1>
-                </div>
-            </div>
-        @endforeach
+        @endif
 
     </div>
 
@@ -173,7 +177,7 @@
                                 <div class="w-full space-y-3">
                                     <x-input-label :value="__('Bedrooms')"/>
                                     <x-secondary-button
-                                        wire:click="$set('BathRooms', {{null}})"
+                                        wire:click="$set('BedRooms', {{null}})"
                                         class=" rounded-xl  capitalize !text-sm !font-bold !border-black {{$BedRooms == null ? '!bg-gray-800 text-white ' : ''}}">
                                         {{__('Any')}}
                                     </x-secondary-button>
@@ -196,7 +200,7 @@
                                     @for($i = 1; $i <= 8; $i++)
                                         <x-secondary-button
                                             wire:click="$set('BathRooms', {{$i}})"
-                                            class="rounded-xl capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center {{ $BathRooms == $i ? 'bg-gray-800 text-white' : '' }}">
+                                            class="rounded-xl capitalize !text-sm !font-bold !border-black !w-16 flex justify-center items-center {{ $BathRooms == $i ? '!bg-gray-800 text-white' : '' }}">
                                             {{$i}}
                                         </x-secondary-button>
                                     @endfor

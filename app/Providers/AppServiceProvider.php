@@ -31,16 +31,12 @@ class AppServiceProvider extends ServiceProvider
 
         //create macro to get all estates with utility named Bedroom and has qunaity of 3
         Builder::macro('whereBedroom', function ($bedroom) {
-            return $bedroom != null ? $this->whereHas('utilities', function ($query) use ($bedroom) {
-                $query->where('name', 'Bedroom')->where('quantity', $bedroom);
-            }) : $this;
+            return $bedroom != null ? $this->where('bedrooms', $bedroom) : $this;
         });
 
         //create macro to get all estates with utility named Bathroom and has qunaity of 3
         Builder::macro('whereBathroom', function ($bathroom) {
-            return $bathroom != null ? $this->whereHas('utilities', function ($query) use ($bathroom) {
-                $query->where('name', 'Bathroom')->where('quantity', $bathroom);
-            }) : $this;
+            return $bathroom != null ? $this->where('bathrooms', $bathroom) : $this;
         });
 
         //create macro to get estates with no commission

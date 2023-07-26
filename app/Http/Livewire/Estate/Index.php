@@ -41,6 +41,7 @@ class Index extends Component
     public function loadMore()
     {
         $this->perPage = $this->perPage + 12;
+
     }
 
     public function mount()
@@ -69,7 +70,9 @@ class Index extends Component
 
     public function render()
     {
-        if ($this->FilteredEstates != null) {
+
+        if ($this->hasFilters()) {
+            $this->applyFilters();
             $this->estates = $this->FilteredEstates;
         } else {
             $this->estates = Estate::with('images')->paginate($this->perPage);
@@ -88,7 +91,6 @@ class Index extends Component
     }
 
 
-
     public function resetFilter()
     {
         $this->reset('MinArea', 'MaxArea', 'MinPrice', 'MaxPrice', 'Type', 'Floors', 'BathRooms', 'BedRooms', 'SelectedUtilities');
@@ -98,7 +100,7 @@ class Index extends Component
     public function updated($propertyName)
     {
 //        dd($propertyName);
-        $this->ResultsCount = Estate::with('images')
+        $this->ResultsCount = Estate::query()
             ->wherePrice($this->MinPrice, $this->MaxPrice)
             ->whereArea($this->MinArea, $this->MaxArea)
             ->whereBedroom($this->BedRooms)
@@ -111,6 +113,7 @@ class Index extends Component
             ->whereType($this->Type)
             ->whereUtilities($this->SelectedUtilities)
             ->count();
+
     }
 
     public function applyFilters()
@@ -132,5 +135,10 @@ class Index extends Component
 
     }
 
+// fucntiom to check if amy of the filters is not null
+    public function hasFilters()
+    {
+        return $this->MinPrice != null || $this->MaxPrice != null || $this->MinArea != null || $this->MaxArea != null || $this->BedRooms != null || $this->BathRooms != null || $this->Floors != null || $this->Type != null || $this->SelectedUtilities != [];
+    }
 
 }
