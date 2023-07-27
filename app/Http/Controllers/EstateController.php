@@ -19,14 +19,10 @@ class EstateController extends Controller
 //show
     public function show(Estate $estate)
     {
-        $utilities = $estate->utilities;
-        // Define the desired utility names
-        $desiredUtilities = collect(['bedroom', 'bathroom', 'kitchen']);
+        $estate->load(['utilities' => function ($query) {
+            $query->select('name', 'estate_utility.quantity');
+        }, 'images']);
 
-        // Filter the utilities based on the desired names
-        $filteredUtilities = $utilities->filter(function ($utility) use ($desiredUtilities) {
-            return $desiredUtilities->contains($utility['name']);
-        });
         return view('estate.show', compact('estate'));
     }
 
