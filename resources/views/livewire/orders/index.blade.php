@@ -27,6 +27,10 @@
                                 <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">estate title</span>
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
+                                wire:click="OrderBy('estates.address')">
+                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">estate Address</span>
+                            </th>
+                            <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
                                 wire:click="OrderBy('estates.price')">
                                 <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">estate price</span>
                             </th>
@@ -43,7 +47,8 @@
 
                         <tbody class="bg-white divide-y divide-gray-200 divide-solid">
                         @foreach($orders as $order)
-                            <tr class="bg-white cursor-pointer" onclick="location.href='{{route('estate.show', $order->estate->id)}}'">
+                            <tr class="bg-white cursor-pointer"
+                                onclick="location.href='{{route('estate.show', $order->estate->id)}}'">
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                     {{ $order->code }}
                                 </td>
@@ -52,6 +57,9 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                     {{ $order->estate->title }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                    {{ $order->estate->address }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                     ${{ number_format($order->estate->price) }}
