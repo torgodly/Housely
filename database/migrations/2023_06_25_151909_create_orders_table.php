@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             //user and estate id
-            $table->string('order_number')->unique();
+            $table->string('code')->unique();
             $table->foreignId('estate_id')->constrained()->onDelete('cascade');
             $table->string('phone_number');
             $table->timestamps();

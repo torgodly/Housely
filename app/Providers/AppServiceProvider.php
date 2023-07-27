@@ -20,6 +20,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        //search
+        Builder::macro('search', function ($fields, $string) {
+            return $string ? $this->where(function ($query) use ($fields, $string) {
+                foreach ($fields as $field) {
+                    $query->orWhere($field, 'like', $string . '%');
+                }
+            }) : $this;
+        });
+
+
         Builder::macro('wherePrice', function ($MinPrice, $MaxPrice) {
             return $MinPrice != null && $MaxPrice != null ? $this->whereBetween('price', [$MinPrice, $MaxPrice]) : $this;
         });
@@ -75,6 +86,7 @@ class AppServiceProvider extends ServiceProvider
         Builder::macro('whereCountry', function ($country) {
             return $country != null ? $this->where('country', $country) : $this;
         });
+
 
 
 

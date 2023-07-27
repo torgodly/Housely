@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
 //                ]
 //            );
         });
-
+        //create 10 orders
+        \App\Models\Order::factory(500)->create();
 
 //
         \App\Models\User::factory()->create([

@@ -36,6 +36,9 @@ Route::middleware('auth','admin')->group(function () {
     // Route for creating an estate
     Route::get('/estate/create', [\App\Http\Controllers\EstateController::class, 'create'])->name('estate.create');
 
+    //orders routes
+    Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+
 
 });
 

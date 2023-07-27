@@ -18,6 +18,10 @@
                     <x-nav-link :href="route('estate.create')" :active="request()->routeIs('estate.create')">
                         {{ __('Create Estate') }}
                     </x-nav-link>
+{{--                    orders--}}
+                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
+                        {{ __('Orders') }}
+                    </x-nav-link>
                 </div>
             </div>
 

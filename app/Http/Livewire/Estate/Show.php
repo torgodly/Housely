@@ -37,7 +37,7 @@ class Show extends Component
             return;
         }
         $order = $this->estate->orders()->create([
-            'order_number' => uniqid('order-', false),
+            'code' => uniqid('order-', false),
 //            'phone_number' => \Auth::user()->phone_number,
             'phone_number' => '0920000000',
 
