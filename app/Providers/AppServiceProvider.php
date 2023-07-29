@@ -72,10 +72,15 @@ class AppServiceProvider extends ServiceProvider
 
         //create macro to get estates that hass the givien utlitys ids
         Builder::macro('whereUtilities', function ($utilities) {
-            return $utilities != null ? $this->whereHas('utilities', function ($query) use ($utilities) {
-                $query->whereIn('utility_id', $utilities);
+            return $utilities !== null ? $this->where(function ($query) use ($utilities) {
+                foreach ($utilities as $utilityId) {
+                    $query->whereHas('utilities', function ($subQuery) use ($utilityId) {
+                        $subQuery->where('utility_id', $utilityId);
+                    });
+                }
             }) : $this;
         });
+
 
         //create macro to get estates by given city
         Builder::macro('whereCity', function ($city) {
