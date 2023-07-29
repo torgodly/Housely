@@ -37,4 +37,6 @@ class Estate extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+
 }

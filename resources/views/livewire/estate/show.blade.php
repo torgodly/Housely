@@ -1,13 +1,16 @@
 <div>
     @if($estate->status == 1)
-    <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full">
-        <div class="bg-gradient-to-r from-red-600 to-pink-500 text-white font-bold py-2 px-6 transform -rotate-45 shadow-lg text-center text-xl">
-            {{__('This estate is sold')}}
+        <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full">
+            <div
+                class="bg-gradient-to-r from-red-600 to-pink-500 text-white font-bold py-2 px-6 transform -rotate-45 shadow-lg text-center text-xl">
+                {{__('This estate is sold')}}
+            </div>
         </div>
-    </div>
     @endif
 
-    <div class="max-w-6xl mx-auto  pt-10 space-y-2 relative @if($estate->status == 1) opacity-30 pointer-events-none @endif"  x-data="{ShowImages: false,
+    <div
+        class="max-w-6xl mx-auto  pt-10 space-y-2 relative @if($estate->status == 1) opacity-30 pointer-events-none @endif"
+        x-data="{ShowImages: false,
  ShowDescription: false , ShowUtilities: false, ShowLogin: @entangle('ShowLogin')}">
 
         <h1 class="text-2xl font-bold pl-2">{{$estate->title}}</h1>
@@ -36,7 +39,8 @@
                              viewBox="0 0 24 24" stroke-width="1"
                              stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                            <path
+                                d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
                         </svg>
                     </div>
 
@@ -105,7 +109,8 @@
 
                             <div
                                 class="px-6 py-3 border border-black rounded-xl flex justify-center items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wall" width="24"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wall"
+                                     width="24"
                                      height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                      stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -197,7 +202,8 @@
                         class="max-w-sm bg-white border border-gray-200 rounded-lg shadow  p-6 flex flex-col justify-center text-center drop-shadow-xl">
                         <div class="flex justify-between items-baseline gap-32">
                             <h1 id="sss" class="text-2xl font-bold ">${{number_format($estate->price)}}</h1>
-                            <h1 class="text-base font-bold underline text-gray-500">{{$estate->favoritedBy()->count()}} favorites</h1>
+                            <h1 class="text-base font-bold underline text-gray-500">{{$estate->favoritedBy()->count()}}
+                                favorites</h1>
                         </div>
                         <div>
                             <x-input-label for="offer" :value="__('Place An Offer')"/>
@@ -206,7 +212,8 @@
                                           :value="1500"/>
                         </div>
                         <div class="flex flex-col gap-3 justify-center items-center">
-                            <x-primary-button wire:click="order" wire:loading.attr="disabled"  :disabled="$estate->status == 1"
+                            <x-primary-button wire:click="order" wire:loading.attr="disabled"
+                                              :disabled="$estate->status == 1"
                                               wire:target="order"
 
                                               class="w-full flex justify-center mt-4 h-12 capitalize !text-base !font-bold">
@@ -360,11 +367,15 @@
 
             <div class="fixed inset-0 z-10 overflow-y-auto">
                 <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                    <div class="relative transform overflow-y-scroll rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-lg md:max-w-7xl sm:p-6 max-h-[90vh]">
+                    <div
+                        class="relative transform overflow-y-scroll rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-lg md:max-w-7xl sm:p-6 max-h-[90vh]">
                         <div class="sticky top-0 px-4 py-1 flex justify-end items-center">
-                            <button type="button" class="rounded-md bg-primary text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-md" @click="ShowUtilities = false">
+                            <button type="button"
+                                    class="rounded-md bg-primary text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-md"
+                                    @click="ShowUtilities = false">
                                 <span class="sr-only">Close</span>
-                                <svg class="h-6 w-6 stroke-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <svg class="h-6 w-6 stroke-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                     stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                                 </svg>
                             </button>
@@ -373,7 +384,8 @@
                             @foreach($estate->utilities as $utility)
                                 <li>
                                     <div class="flex items-center">
-                                        <span class="text-lg font-semibold text-black capitalize">{{ $utility->name }}</span>
+                                        <span
+                                            class="text-lg font-semibold text-black capitalize">{{ $utility->name }}</span>
                                         <span class="text-gray-800 ml-2">x {{ $utility->quantity }}</span>
                                     </div>
                                 </li>
@@ -411,7 +423,8 @@
                                 </a>
                             </div>
 
-                            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                            <div
+                                class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
 

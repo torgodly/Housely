@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 //         \App\Models\User::factory(10)->create();
-        Utility::factory(8)->create();
+        Utility::factory(100)->create();
 
         //create 10 estate and attach 5 utilities to each one with random quantity
         Estate::factory(100)->create()->each(function ($estate) {

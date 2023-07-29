@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 sticky top-0 z-10">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 sticky top-0 z-50">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
@@ -17,7 +17,8 @@
                     <div id="search-bar"
                          class="pl-2 rounded-full  border   shadow-md hover:shadow-lg transition duration-200 ease-in-out flex justify-between items-center gap-8 md:gap-28">
                         <h1 class="px-4 font-bold text-sm">Start your search</h1>
-                        <div class="rounded-full bg-[#ff385c] w-8 h-8 flex justify-center items-center my-[7px] mr-[7px]">
+                        <div
+                            class="rounded-full bg-[#ff385c] w-8 h-8 flex justify-center items-center my-[7px] mr-[7px]">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"
                                  role="presentation" focusable="false"
                                  class=" w-3 h-3 stroke-white stroke-[5.33333]">
@@ -87,6 +88,13 @@
 
                         <x-slot name="content">
                             @if(Auth::check())
+
+                                <x-dropdown-link :href="route('favorites.index')">
+                                    {{ __('Favorites') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('profile.edit')">
+                                    {{ __('Profile') }}
+                                </x-dropdown-link>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
@@ -96,9 +104,7 @@
                                         {{ __('Log Out') }}
                                     </x-dropdown-link>
                                 </form>
-                                <x-dropdown-link :href="route('profile.edit')">
-                                    {{ __('Profile') }}
-                                </x-dropdown-link>
+
                             @else
                                 <x-dropdown-link class="font-bold" :href="route('login')">
                                     {{ __('Sign in') }}
