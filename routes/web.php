@@ -41,6 +41,9 @@ Route::middleware('auth','admin')->group(function () {
     //estate table
     Route::get('/estates', [\App\Http\Controllers\EstateController::class, 'index'])->name('estates.index');
 
+    //destroy estate
+    Route::delete('/estate/{estate}', [\App\Http\Controllers\EstateController::class, 'destroy'])->name('estate.destroy');
+
 
 
 });

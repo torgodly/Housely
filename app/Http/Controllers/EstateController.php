@@ -41,6 +41,17 @@ class EstateController extends Controller
 
     }
 
+    //destroy
+    public function destroy(Request $request, $estate)
+    {
+        $request->validateWithBag('estateDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+        $estate = Estate::withoutGlobalScopes()->find($estate);
+        $estate->delete();
+        session()->flash('Message', 'Estate deleted successfully');
+        return redirect()->route('estates.index');
+    }
 
 
 }

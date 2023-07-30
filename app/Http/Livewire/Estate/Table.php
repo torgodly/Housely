@@ -14,6 +14,7 @@ class Table extends Component
     public $sortField;
     public $search;
     public $sortDirection;
+    public $confirmEstateDeletion;
 
     public function mount()
     {
@@ -45,5 +46,10 @@ class Table extends Component
         }
 
         $this->sortField = $field;
+    }
+
+    public function confirmEstateDeletion($estate)
+    {
+        $this->confirmEstateDeletion = $estate;
     }
 }
