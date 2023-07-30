@@ -28,7 +28,8 @@ return new class extends Migration {
             $table->integer('bedrooms')->default(0);
             $table->integer('bathrooms')->default(0);
             $table->text('description')->nullable();
-            $table->boolean('status')->default(0);
+            $table->boolean('available')->default(0);
+            $table->timestamp('sold_at')->nullable();
             $table->string('company');
             //TODO: add  estate rent or sale boolean field
 

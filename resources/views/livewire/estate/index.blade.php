@@ -42,14 +42,19 @@
             @foreach($estates as $estate)
                 <div class="relative">
 
-                    @if($estate->status == 1)
+                    @if($estate->available == 0)
                         <div class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full">
-                            <div class="bg-gradient-to-r from-red-600 to-pink-500 text-white font-bold py-2 px-6 shadow-lg text-center text-xl">
+                            <div
+                                class="bg-gradient-to-r from-red-600 to-pink-500 text-white font-bold py-2 px-6 shadow-lg text-center text-xl">
                                 {{__('This estate is sold')}}
                             </div>
                         </div>
                     @endif
-                    <div class="flex flex-col gap-3 cursor-pointer @if($estate->status == 1) opacity-30 pointer-events-none @endif"
+                    <div class="flex flex-col gap-3 cursor-pointer  @if($estate->available == 0)
+        @if(Auth::check() && Auth::user()->role == 'user')
+        opacity-30 pointer-events-none
+         @endif
+          @endif"
                          onclick="location.href='{{route('estate.show', $estate->id)}}'">
                         <div class="relative">
                             <!-- component -->

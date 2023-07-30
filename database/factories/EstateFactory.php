@@ -39,7 +39,7 @@ class EstateFactory extends Factory
             'land_area' => $landArea,
             'building_area' => $buildingArea,
             'price' => $this->faker->numberBetween(100000, 1000000),
-            'status' => $this->faker->boolean(),
+            'available' => $this->faker->boolean(),
             'long' => $this->faker->longitude(),
             'lat' => $this->faker->latitude(),
             'description' => $this->faker->paragraph(3),
@@ -50,6 +50,7 @@ class EstateFactory extends Factory
             'company' => $this->faker->company(),
             'bedrooms' => $this->faker->numberBetween(1, 10),
             'bathrooms' => $this->faker->numberBetween(1, 10),
+            'sold_at' => now()
 
 
         ];

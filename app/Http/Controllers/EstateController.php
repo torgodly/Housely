@@ -17,13 +17,22 @@ class EstateController extends Controller
     }
 
 //show
-    public function show(Estate $estate)
-    {
-        $estate->load(['utilities' => function ($query) {
-            $query->select('name', 'estate_utility.quantity');
-        }, 'images']);
+    public function show($estate) {
 
+        // Disable global scope
+        $estate = Estate::withoutGlobalScopes()->findOrFail($estate);
+
+        // Load relations
+        $estate->load([
+            'utilities' => function ($query) {
+                $query->select('name', 'estate_utility.quantity');
+            },
+            'images'
+        ]);
+
+        // Render view
         return view('estate.show', compact('estate'));
+
     }
 
 

@@ -8,7 +8,7 @@ class Show extends Component
 {
     public $estate;
     public $utilities;
-    public $ShowLogin=false;
+    public $ShowLogin = false;
 
     public function render()
     {
@@ -22,7 +22,7 @@ class Show extends Component
     public function favorite()
     {
         if (!\Auth::check()) {
-            $this->ShowLogin=true;
+            $this->ShowLogin = true;
             return;
         }
         $this->estate->favoritedBy()->toggle(\Auth::user());
@@ -33,7 +33,7 @@ class Show extends Component
     {
 
         if (!\Auth::check()) {
-            $this->ShowLogin=true;
+            $this->ShowLogin = true;
             return;
         }
         $order = $this->estate->orders()->create([
@@ -45,5 +45,24 @@ class Show extends Component
 
     }
 
+    //sold
+    public function sold()
+    {
+
+        //update available to the opposite
+        if ($this->estate->available) {
+            $this->estate->update([
+                'available' => false,
+                'sold_at' => now()
+
+            ]);
+        } else {
+            $this->estate->update([
+                'available' => true,
+                'sold_at' => null
+
+            ]);
+        }
+    }
 
 }

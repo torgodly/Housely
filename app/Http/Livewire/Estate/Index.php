@@ -51,6 +51,7 @@ class Index extends Component
     // Render the Livewire component
     public function render()
     {
+//        var_dump($this->hasFilters());
         if ($this->hasFilters()) {
             // Apply filters and get the filtered estates
             $this->applyFilters();
@@ -58,7 +59,7 @@ class Index extends Component
 
         } else {
             // If no filters, fetch random estates
-            $this->estates = Estate::with('images')->inRandomOrder()->paginate($this->perPage);
+            $this->estates = Estate::with('images')->paginate($this->perPage);
         }
 
         // Fetch all available utilities
@@ -67,7 +68,6 @@ class Index extends Component
         // Render the Livewire component with the estates data
         return view('livewire.estate.index', [
             'estates' => $this->estates,
-
             'utilities' => $this->Utilities
         ]);
     }
