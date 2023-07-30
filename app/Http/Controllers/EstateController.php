@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class EstateController extends Controller
 {
+    public function index()
+    {
+
+        return view('estate.table');
+    }
+
     public function create()
     {
         $utilities = Utility::all();

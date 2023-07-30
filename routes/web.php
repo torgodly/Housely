@@ -38,6 +38,8 @@ Route::middleware('auth','admin')->group(function () {
 
     //orders routes
     Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+    //estate table
+    Route::get('/estates', [\App\Http\Controllers\EstateController::class, 'index'])->name('estates.index');
 
 
 
