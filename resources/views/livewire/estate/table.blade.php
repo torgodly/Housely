@@ -85,7 +85,7 @@
                                     {{ $estate->floors }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                    {{ number_format($estate->price) }}
+                                    ${{ number_format($estate->price) }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                     %{{ $estate->discount }}

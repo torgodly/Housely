@@ -27,11 +27,23 @@ Route::get('/', function () {
 // Route for the dashboard (requires authentication and email verification)
 Route::get('/dashboard', function () {
     // Display the dashboard view
-    return view('dashboard');
-})->middleware(['auth', 'verified','admin'])->name('dashboard');
+
+    //get estates with available is 0
+    $sold = \App\Models\Estate::withoutGlobalScopes()->where('available', 0)->count();
+    $all = \App\Models\Estate::withoutGlobalScopes()->count();
+    $customers = \App\Models\User::where('role', 'user')->count();
+    return view('dashboard',
+        [
+            'sold' => $sold,
+            'all' => $all,
+            'customers' => $customers
+        ]
+    );
+
+})->middleware(['auth', 'verified', 'admin'])->name('dashboard');
 
 // Routes that require authentication
-Route::middleware('auth','admin')->group(function () {
+Route::middleware('auth', 'admin')->group(function () {
 
     // Route for creating an estate
     Route::get('/estate/create', [\App\Http\Controllers\EstateController::class, 'create'])->name('estate.create');
@@ -43,7 +55,6 @@ Route::middleware('auth','admin')->group(function () {
 
     //destroy estate
     Route::delete('/estate/{estate}', [\App\Http\Controllers\EstateController::class, 'destroy'])->name('estate.destroy');
-
 
 
 });
