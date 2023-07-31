@@ -16,8 +16,11 @@ class Index extends Component
     public $search;
     public $sortDirection;
     public $ID;
+    public $phone_number;
     protected $queryString = [
         'ID' => ['except' => ''],
+        'phone_number' => ['except' => ''],
+        'search' => ['except' => ''],
     ];
 
     public function mount()
@@ -35,12 +38,14 @@ class Index extends Component
     {
         $this->orders = Order::query()
             ->search(['estate_id'], $this->ID)
+            ->search(['phone_number'], $this->phone_number)
             ->join('estates', 'orders.estate_id', '=', 'estates.id')
             ->select('orders.*')
             ->with('estate')
-            ->search(['code', 'phone_number'], $this->search)
+            ->search(['orders.code', 'phone_number'], $this->search)
             ->orderBy($this->sortField, $this->sortDirection) // Use correct column name here
             ->paginate(20);
+//        dd($this->orders);
 
         return view('livewire.orders.index', [
             'orders' => $this->orders
@@ -56,5 +61,11 @@ class Index extends Component
         }
 
         $this->sortField = $field;
+    }
+
+    //resetFilters
+    public function resetFilters()
+    {
+        $this->reset(['search', 'ID', 'phone_number']);
     }
 }

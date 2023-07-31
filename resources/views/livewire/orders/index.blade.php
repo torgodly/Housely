@@ -1,12 +1,15 @@
 <div class="py-12">
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-fit mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
             <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
-                <div class="py-1.5">
+                <div class="py-1.5 flex justify-between items-center">
                     <x-text-input type="text" class="mt-1 block w-1/3" wire:model="search"
                                   placeholder="search by code or phone number"/>
+                    @if(request()->has('ID') || request()->has('phone_number') || request()->has('search'))
+                        <x-secondary-button class="mt-1" wire:click="resetFilters">Reset Filters</x-secondary-button>
+                    @endif
 
                 </div>
                 <div class="min-w-full align-middle">
@@ -15,49 +18,50 @@
                         <tr>
                             <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer" wire:click="OrderBy('code')">
                                 <span
-                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">code</span>
+                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Code')}}</span>
+                            </th>
+                            <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
+                                wire:click="OrderBy('estates.title')">
+                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Estate Code')}}</span>
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
                                 wire:click="OrderBy('phone_number')">
                                 <span
-                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">phone number</span>
+                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('phone number')}}</span>
                             </th>
-                            <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
-                                wire:click="OrderBy('estates.title')">
-                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">estate title</span>
-                            </th>
+
                             <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
                                 wire:click="OrderBy('estates.address')">
-                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">estate Address</span>
+                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('estate Address')}}</span>
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
                                 wire:click="OrderBy('estates.price')">
-                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">estate price</span>
+                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('estate price')}}</span>
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
                                 wire:click="OrderBy('estates.discount')">
-                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">estate discount</span>
+                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('estate discount')}}</span>
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
                                 wire:click="OrderBy('estates.commission')">
-                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">estate commission</span>
+                                <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('estate commission')}}</span>
                             </th>
                         </tr>
                         </thead>
 
                         <tbody class="bg-white divide-y divide-gray-200 divide-solid">
                         @foreach($orders as $order)
-                            <tr class="bg-white cursor-pointer"
-                                onclick="location.href='{{route('orders.index', ['ID' => $order->estate->id])}}'">
+                            <tr class="bg-white cursor-pointer">
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                     {{ $order->code }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900"  onclick="location.href='{{route('orders.index', ['ID' => $order->estate->id])}}'">
+                                    {{ $order->estate->code }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900"  onclick="location.href='{{route('orders.index', ['phone_number' => $order->phone_number])}}'">
                                     {{ $order->phone_number }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                    {{ $order->estate->title }}
-                                </td>
+
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                     {{ $order->estate->address }}
                                 </td>

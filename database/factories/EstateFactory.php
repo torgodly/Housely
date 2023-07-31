@@ -32,6 +32,7 @@ class EstateFactory extends Factory
         $buildingArea = round($landArea * 0.75, 2); // Set building area to 3/4 of land area
 
         return [
+            'code' => uniqid('estate-', false),
             'title' => $this->faker->sentence(3),
             'type' => $this->faker->randomElement($propertyTypes),
             'address' => $this->faker->randomElement($addresses),

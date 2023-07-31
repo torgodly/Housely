@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('estates', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
             $table->string('title');
             $table->string('type');
             $table->string('address');
