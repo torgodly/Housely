@@ -3,8 +3,8 @@
         <!-- component -->
         <div class="w-full h-screen flex flex-col items-center justify-center">
             <div class="flex flex-col items-center justify-center">
-                <p class="text-3xl md:text-4xl lg:text-5xl text-gray-800 mt-12">{{__('You Dont have Any Favorite Estates')}}</p>
-                <p class="md:text-lg lg:text-xl text-gray-600 mt-8 capitalize">{{__('Sorry, You Dont have Any Favorite Estates add some Estates to your Favorites')}}</p>
+                <p class="text-3xl md:text-4xl lg:text-5xl text-gray-800 mt-12 capitalize">{{__('No estates found matching your filter')}}</p>
+                <p class="md:text-lg lg:text-xl text-gray-600 mt-8 capitalize">{{__('Sorry, but there are no estates that match the filter you have applied. Please try different filter options.')}}</p>
 
                 <x-primary-button
                     wire:click="resetFilter()"
@@ -31,7 +31,7 @@
                     <path d="M16 19h6"></path>
                     <path d="M19 16v6"></path>
                 </svg>
-                filter
+                {{__('Filter')}}
             </x-secondary-button>
 
         </div>
@@ -309,9 +309,9 @@
 
                                     </x-secondary-button>
                                     <x-secondary-button
-                                        wire:click="$set('Type', 'Guest_House')"
+                                        wire:click="$set('Type', 'Guest House ')"
 
-                                        class=" rounded-xl  capitalize !text-lg !font-bold !border-black flex flex-col !justify-start !items-start gap-9 w-1/4 {{$Type == 'Guest_House' ? '!bg-gray-200' : ''}}">
+                                        class=" rounded-xl  capitalize !text-lg !font-bold !border-black flex flex-col !justify-start !items-start gap-9 w-1/4 {{$Type == 'Guest House ' ? '!bg-gray-200' : ''}}">
                                         <img
                                             src="https://a0.muscache.com/pictures/6f261426-2e47-4c91-8b1a-7a847da2b21b.jpg"
                                             alt="" class="w-8 h-8">
@@ -351,7 +351,7 @@
                             </div>
                             <button id="seeMoreBtn"
                                     class="text-lg mt-3 underline @if(count($utilities) <= 8) hidden @endif">
-                                See More
+                                {{__('See More')}}
                             </button>
                             <script wire:ignore>
                                 const showMoreButton = document.getElementById('seeMoreBtn');

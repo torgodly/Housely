@@ -5,13 +5,17 @@
             <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
                 <div class="py-1.5">
                     <x-text-input type="text" class="mt-1 block w-1/3" wire:model="search"
-                                  placeholder="search by code or phone number"/>
+                                  placeholder="{{__('search by code, company, city, country')}}"/>
 
                 </div>
                 <div class="min-w-full align-middle">
                     <table class="min-w-full divide-y divide-gray-200 border">
                         <thead>
                         <tr>
+                            <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer" wire:click="OrderBy('code')">
+                                <span
+                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Code')}}</span>
+                            </th>
                             <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer" wire:click="OrderBy('type')">
                                 <span
                                     class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Type')}}</span>
@@ -68,12 +72,15 @@
                             <tr class="bg-white cursor-pointer"
                                 onclick="location.href='{{route('estate.show', $estate->id)}}'">
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                    {{ $estate->type }} {{ $estate->id}}
+                                    {{ $estate->code }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                    {{ $estate->type }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                     {{ $estate->company }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900 " dir="auto" >
                                     {{ $estate->address }} - {{ $estate->city }} - {{ $estate->country }}
                                 </td>
 
@@ -122,7 +129,7 @@
                                         x-data=""
                                         wire:click="confirmEstateDeletion({{ $estate->id }})"
                                         x-on:click.prevent="$dispatch('open-modal', 'confirm-estate-deletion')"
-                                    >{{ __('Delete Account') }}
+                                    >{{ __('Delete Estate') }}
                                     </x-danger-button>
                                 </td>
                             </tr>

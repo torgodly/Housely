@@ -30,7 +30,7 @@ class Table extends Component
     public function render()
     {
         $this->estates = Estate::withoutGlobalScope('available')
-            ->search(['address','company', 'city', 'country', 'price'], $this->search)
+            ->search(['company', 'city', 'country', 'code'], $this->search)
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(20);
         return view('livewire.estate.table', [

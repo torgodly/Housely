@@ -1,9 +1,9 @@
-<div>
+<div >
     @if($estate->available == 0)
 
         <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full">
             <div
-                class="bg-gradient-to-r from-red-600 to-pink-500 text-white font-bold py-2 px-6 transform -rotate-45 shadow-lg text-center text-xl">
+                class="bg-gradient-to-r from-red-600 to-pink-500 text-white font-bold py-2 px-6 transform -rotate-45 shadow-lg text-center text-xl capitalize">
                 {{__('This estate is sold')}}
             </div>
         </div>
@@ -25,7 +25,7 @@
         <h1 class="text-2xl font-bold pl-2">{{$estate->title}}</h1>
         <div class="flex justify-between items-center">
             <div class="flex justify-start items-center gap-2">
-                <span class="text-sm font-bold underline">{{$estate->favoritedBy()->count()}} favorites</span>
+                <span class="text-sm font-bold underline">{{$estate->favoritedBy()->count()}} {{__('Likes')}}</span>
                 <span class="text-base font-bold">·</span>
                 <span
                     class="text-sm font-bold underline">{{$estate->city}}, {{$estate->country}}, {{$estate->address}}</span>
@@ -53,7 +53,7 @@
                         </svg>
                     </div>
 
-                    <span class="text-sm font-bold underline">{{__('favorite')}}</span>
+                    <span class="text-sm font-bold underline">{{__('Likes')}}</span>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                     <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
                     <path d="M19 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
                 </svg>
-                <p class="text-sm font-bold">Show all photos</p>
+                <p class="text-sm font-bold">{{__('Show all photos')}}</p>
             </div>
         </div>
         <div class="flex justify-between  !mt-12 gap-14  ">
@@ -90,9 +90,10 @@
 
                     <div class=" flex justify-between items-center gap-10 h-20">
                         {{--                        TODO: add company name--}}
-                        <h1 class="text-2xl font-bold normal-case">Entire {{$estate->type}} for sale
-                            by {{$estate->company}}</h1>
-
+                        <h1 class="text-2xl font-bold normal-case capitalize"
+                            dir="auto"> {{ __('Entire') }} @switch($estate->type)
+                                @case('House') {{ __('المنزل') }} @break @case('Apartment') {{ __('الشقة') }} @break @case('Hotel') {{ __('الفندق') }} @break @case('Guest House') {{ __('الاستراحة') }} @break @default {{ __('العقار') }}
+                            @endswitch {{ __('for sale by') }} {{ $estate->company }} </h1>
                     </div>
                     <div class="flex flex-wrap gap-5 items-center">
                         <div>
@@ -168,7 +169,7 @@
                     </div>
                 </div>
                 <div class="mt-8">
-                    <h1 class="text-2xl font-bold">About this space</h1>
+                    <h1 class="text-2xl font-bold capitalize">{{__('About this space')}}</h1>
                     <p class="text-base font-light text-black mt-4 line-clamp-5">
                         {{$estate->description}}
                     </p>
@@ -191,7 +192,7 @@
                 </div>
 
                 <div class="mt-8 w-fit">
-                    <h1 class="text-2xl font-bold">What this place offers</h1>
+                    <h1 class="text-2xl font-bold capitalize">{{__('What this place offers')}}</h1>
                     <div class="grid grid-cols-2 grid-rows-3 mt-4 ml-1 gap-4">
                         @foreach($estate->utilities->take(6) as $utility)
                             <div class="flex justify-start items-center gap-4">
@@ -201,7 +202,7 @@
                     </div>
                     <x-secondary-button @click="ShowUtilities = true"
                                         class="mt-6 rounded-xl !px-6 py-3 capitalize !text-sm !font-bold !border-black">
-                        {{__('Show all '.$estate->utilities->count().' utilities')}}
+                        {{ __('show_all_utilities', ['count' => $estate->utilities->count()]) }}
                     </x-secondary-button>
                 </div>
             </div>
@@ -212,7 +213,7 @@
                         <div class="flex justify-between items-baseline gap-32">
                             <h1 id="sss" class="text-2xl font-bold ">${{number_format($estate->price)}}</h1>
                             <h1 class="text-base font-bold underline text-gray-500">{{$estate->favoritedBy()->count()}}
-                                favorites</h1>
+                                {{__('Likes')}}</h1>
                         </div>
 
                         <div class="flex flex-col gap-3 justify-center items-center">
@@ -295,7 +296,7 @@
                                 </x-primary-button>
                             @endif
                             <h1 class="font-thin text-sm text-gray-500">
-                                You won't be charged yet
+                                {{__("You won't be charged yet")}}
                             </h1>
                         </div>
                         <div class="flex flex-col">
@@ -307,14 +308,14 @@
                             @if(isset($estate->discount))
                                 <div class="flex justify-between items-baseline gap-32 mt-4">
                                     <h1 class="font-thin text-base text-gray-500 underline underline-offset-1 decoration-1">
-                                        {{$estate->discount}}% discount</h1>
+                                        {{$estate->discount}}% {{__('Discount')}}</h1>
                                     <h1 class="font-thin text-base text-green-500">
                                         -${{ number_format($estate->price * ($estate->discount / 100)) }}</h1>
                                 </div>
                             @endif
                             <div class="flex justify-between items-baseline gap-32 mt-4">
                                 <h1 class="font-thin text-base text-gray-500 underline underline-offset-1 decoration-1">
-                                    {{$estate->commission}}% commission</h1>
+                                    {{$estate->commission}}% {{__('Commission')}}</h1>
                                 <h1 class="font-thin text-base text-gray-500">
                                     ${{ number_format(($estate->price * $estate->commission) / 100) }}</h1>
                             </div>
@@ -324,25 +325,25 @@
                                 </div>
                             </div>
                             <div class="flex justify-between items-baseline gap-32 mt-4">
-                                <h1 class="font-semibold text-lg text-black">Total Price</h1>
+                                <h1 class="font-semibold text-lg text-black">{{__('Total Price')}}</h1>
                                 <h1 class="font-bold text-lg text-black">
                                     ${{ number_format($estate->price - ($estate->price * $estate->discount / 100),) }}</h1>
                             </div>
 
                         </div>
                     </div>
-{{--                    TODO: report lesting--}}
-{{--                    <div class="flex justify-center items-center gap-4">--}}
-{{--                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"--}}
-{{--                             role="presentation"--}}
-{{--                             class="w-4 h-4 fill-gray-500"--}}
-{{--                             focusable="false">--}}
-{{--                            <path--}}
-{{--                                d="M28 6H17V4a2 2 0 0 0-2-2H3v28h2V18h10v2a2 2 0 0 0 2 2h11.12a1 1 0 0 0 .84-1.28L27.04 14l1.92-6.72A1 1 0 0 0 28 6z"></path>--}}
-{{--                        </svg>--}}
-{{--                        <h1 class="text-base font-bold underline text-gray-500">Report this listing</h1>--}}
+                    {{--                    TODO: report lesting--}}
+                    {{--                    <div class="flex justify-center items-center gap-4">--}}
+                    {{--                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"--}}
+                    {{--                             role="presentation"--}}
+                    {{--                             class="w-4 h-4 fill-gray-500"--}}
+                    {{--                             focusable="false">--}}
+                    {{--                            <path--}}
+                    {{--                                d="M28 6H17V4a2 2 0 0 0-2-2H3v28h2V18h10v2a2 2 0 0 0 2 2h11.12a1 1 0 0 0 .84-1.28L27.04 14l1.92-6.72A1 1 0 0 0 28 6z"></path>--}}
+                    {{--                        </svg>--}}
+                    {{--                        <h1 class="text-base font-bold underline text-gray-500">Report this listing</h1>--}}
 
-{{--                    </div>--}}
+                    {{--                    </div>--}}
                 </div>
             </div>
 
