@@ -77,5 +77,8 @@ Route::middleware('auth')->group(function () {
 // Route for showing a specific estate
 Route::get('/estate/{estate}', [\App\Http\Controllers\EstateController::class, 'show'])->name('estate.show');
 
+Route::get('lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'switchLang'])->name('lang.switch');
+
+
 // Include authentication routes
 require __DIR__ . '/auth.php';
