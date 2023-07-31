@@ -218,7 +218,7 @@
 
                         <div class="flex flex-col gap-3 justify-center items-center">
                             @if(!Auth::check() || Auth::user()->role === 'user')
-                                @if(Auth::user()->hasOrdered($estate))
+                                @if(Auth::user()?->hasOrdered($estate))
                                     <x-primary-button wire:click="cancelOrder" wire:loading.attr="disabled"
                                                       :disabled="$estate->available == 0"
 
