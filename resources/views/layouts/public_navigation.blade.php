@@ -31,7 +31,7 @@
                 </div>
             @endif
             {{--            setting + language + add your house--}}
-            <div class="shrink-0 flex items-center justify-between gap-5">
+            <div class="shrink-0 flex items-center justify-between gap-5" x-data="{LanguageToggle: false}">
                 @if(request()->routeIs('estate.index'))
                     <x-secondary-button
                         class="border-0 !shadow-none focus:ring-0 hover:bg-[#F7F7F7] focus:border-0 !rounded-full hidden md:block !py-2 !px-4 !text-base  !normal-case">
@@ -40,7 +40,7 @@
                     </x-secondary-button>
                 @endif
 
-                <div class="hover:bg-gray-100 rounded-full p-2">
+                <div class="hover:bg-gray-100 rounded-full p-2" @click="LanguageToggle = !LanguageToggle">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world" width="20"
                          height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
                          stroke-linecap="round" stroke-linejoin="round">
@@ -51,37 +51,28 @@
                         <path d="M11.5 3a17 17 0 0 0 0 18"></path>
                         <path d="M12.5 3a17 17 0 0 1 0 18"></path>
                     </svg>
-                </div>
-                    <div class="absolute m-5">
-                        <div class="" x-data="{LanguageToggle: false}">
-                            <button type="button" @click="LanguageToggle = !LanguageToggle"
-                                    class=" bg-gray-200 inline-flex gap-2 items-center justify-center px-4 py-2 text-sm text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <span class="fi fi-{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}"></span>
-                                <h1 class="font-medium">{{ Config::get('languages')[App::getLocale()]['display'] }} </h1>
-                            </button>
-                            <!-- Dropdown -->
-                            <div x-show="LanguageToggle"
-                                 class="z-50 absolute my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-slate-800"
-                            >
-                                <ul class="py-2" role="none">
 
-                                    @foreach (Config::get('languages') as $lang => $language)
-                                        @if ($lang != App::getLocale())
-                                            <a href="{{ route('lang.switch', $lang) }}"
-                                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                                               role="menuitem">
-                                                <div class="inline-flex items-center gap-2">
-                                                    <span class="fi fi-{{ $language['flag-icon'] }}"></span>
-                                                    <h1>{{ $language['display'] }}</h1>
-                                                </div>
-                                            </a>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
+                    <div x-show="LanguageToggle"
+                         class="z-50 absolute my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow "
+                    >
+                        <ul class="py-2" role="none">
 
+                            @foreach (Config::get('languages') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                    <a href="{{ route('lang.switch', $lang) }}"
+                                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                                       role="menuitem">
+                                        <div class="inline-flex items-center gap-2">
+                                            <span class="fi fi-{{ $language['flag-icon'] }}"></span>
+                                            <h1>{{ $language['display'] }}</h1>
+                                        </div>
+                                    </a>
+                                @endif
+                            @endforeach
+                        </ul>
                     </div>
+
+                </div>
 
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
