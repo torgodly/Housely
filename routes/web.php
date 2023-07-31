@@ -32,11 +32,13 @@ Route::get('/dashboard', function () {
     $sold = \App\Models\Estate::withoutGlobalScopes()->where('available', 0)->count();
     $all = \App\Models\Estate::withoutGlobalScopes()->count();
     $customers = \App\Models\User::where('role', 'user')->count();
+    $orders = \App\Models\Order::count();
     return view('dashboard',
         [
             'sold' => $sold,
             'all' => $all,
-            'customers' => $customers
+            'customers' => $customers,
+            'orders' => $orders,
         ]
     );
 

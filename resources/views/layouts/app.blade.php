@@ -42,7 +42,7 @@
 
 
     {{-- TODO: lesten for flash succsess message--}}
-    @if (session()->has('Message'))
+    @if (session()->has('message'))
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-4">
             <div x-data="{ show: true }"
                  x-show="show"

@@ -16,6 +16,7 @@ return new class extends Migration
             //user and estate id
             $table->string('code')->unique();
             $table->foreignId('estate_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('phone_number');
             $table->timestamps();
         });

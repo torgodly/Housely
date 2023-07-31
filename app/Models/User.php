@@ -56,5 +56,17 @@ class User extends Authenticatable
         return $this->role === 'admin';
     }
 
+    //orders
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    //check if user has ordered an estate
+    public function hasOrdered(Estate $estate)
+    {
+        return $this->orders()->where('estate_id', $estate->id)->exists();
+    }
+
 
 }

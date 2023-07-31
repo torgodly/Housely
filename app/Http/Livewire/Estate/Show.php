@@ -36,13 +36,20 @@ class Show extends Component
             $this->ShowLogin = true;
             return;
         }
-        $order = $this->estate->orders()->create([
+        $order = \Auth::user()->orders()->create([
             'code' => uniqid('order-', false),
-//            'phone_number' => \Auth::user()->phone_number,
-            'phone_number' => '0920000000',
+            'phone_number' => \Auth::user()->phone_number,
+            'estate_id' => $this->estate->id,
 
         ]);
+        session()->flash('message', 'Order created successfully.');
+    }
 
+    //cancel order
+    public function cancelOrder()
+    {
+        \Auth::user()->orders()->where('estate_id', $this->estate->id)->delete();
+        session()->flash('message', 'Order canceled successfully.');
     }
 
     //sold
