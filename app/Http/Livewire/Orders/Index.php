@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Livewire\Orders;
 
 use App\Models\Order;
@@ -14,6 +15,10 @@ class Index extends Component
     public $sortField;
     public $search;
     public $sortDirection;
+    public $ID;
+    protected $queryString = [
+        'ID' => ['except' => ''],
+    ];
 
     public function mount()
     {
@@ -29,10 +34,11 @@ class Index extends Component
     public function render()
     {
         $this->orders = Order::query()
+            ->search(['estate_id'], $this->ID)
             ->join('estates', 'orders.estate_id', '=', 'estates.id')
             ->select('orders.*')
             ->with('estate')
-            ->search(['code','phone_number'], $this->search)
+            ->search(['code', 'phone_number'], $this->search)
             ->orderBy($this->sortField, $this->sortDirection) // Use correct column name here
             ->paginate(20);
 

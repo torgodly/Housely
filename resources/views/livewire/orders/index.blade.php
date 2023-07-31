@@ -48,7 +48,7 @@
                         <tbody class="bg-white divide-y divide-gray-200 divide-solid">
                         @foreach($orders as $order)
                             <tr class="bg-white cursor-pointer"
-                                onclick="location.href='{{route('estate.show', $order->estate->id)}}'">
+                                onclick="location.href='{{route('orders.index', ['ID' => $order->estate->id])}}'">
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                     {{ $order->code }}
                                 </td>
