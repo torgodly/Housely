@@ -1,5 +1,5 @@
-<div class="py-12">
-    <div class="max-w-fit mx-auto sm:px-6 lg:px-8">
+<div class="py-12" >
+    <div class="w-fit min-w-[80%] mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
             <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">

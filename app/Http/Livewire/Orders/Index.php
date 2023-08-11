@@ -42,7 +42,7 @@ class Index extends Component
             ->join('estates', 'orders.estate_id', '=', 'estates.id')
             ->select('orders.*')
             ->with('estate')
-            ->search(['orders.code', 'phone_number'], $this->search)
+            ->search(['orders.code', 'phone_number','estates.code'], $this->search)
             ->orderBy($this->sortField, $this->sortDirection) // Use correct column name here
             ->paginate(20);
 //        dd($this->orders);

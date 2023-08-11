@@ -130,7 +130,7 @@
             }
         };
     </script>
-    <div class="relative z-10" x-show="ShowFilter" style="display: none">
+    <div class="relative z-40" x-show="ShowFilter" style="display: none">
         <!-- Background Overlay -->
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
@@ -138,7 +138,7 @@
         <div class="fixed inset-0 z-10 ">
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <div
-                    class="relative transform rounded-lg bg-white overflow-y-auto   pt-5 text-left shadow-xl transition-all sm:my-8 w-1/2 max-w-lg md:max-w-7xl  max-h-[90vh]">
+                    class="relative transform rounded-lg bg-white overflow-y-auto   pt-5 text-left shadow-xl transition-all sm:my-8 w-1/2 max-w-fit  max-h-[90vh]">
 
                     <div class="px-4 pb-5">
                         <!-- Close Button -->
@@ -277,10 +277,10 @@
                             <h1 class="text-xl font-bold">{{__('Property type')}}</h1>
                             <div class="flex flex-col gap-5 justify-between ">
 
-                                <div class="w-full  mt-4 flex gap-2 ">
+                                <div class="w-full  mt-4 flex gap-2  ">
                                     <x-secondary-button
                                         wire:click="$set('Type', 'House')"
-                                        class=" rounded-xl  capitalize !text-lg !font-bold !border-black flex flex-col !justify-start !items-start gap-9 w-1/4 {{$Type == 'House' ? '!bg-gray-200' : ''}}">
+                                        class=" rounded-xl  capitalize !text-lg !font-bold !border-black flex flex-col !justify-start !items-start gap-8 w-1/4 !h-fit{{$Type == 'House' ? '!bg-gray-200' : ''}}">
                                         <img
                                             src="https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg"
                                             alt="" class="w-8 h-8">
@@ -291,7 +291,7 @@
                                     <x-secondary-button
                                         wire:click="$set('Type', 'Apartment')"
 
-                                        class=" rounded-xl  capitalize !text-lg !font-bold !border-black flex flex-col !justify-start !items-start gap-9 w-1/4 {{$Type == 'Apartment' ? '!bg-gray-200' : ''}}">
+                                        class=" rounded-xl  capitalize !text-lg !font-bold !border-black flex flex-col !justify-start !items-start gap-8 w-1/4 !h-fit {{$Type == 'Apartment' ? '!bg-gray-200' : ''}}">
                                         <img
                                             src="https://a0.muscache.com/pictures/21cfc7c9-5457-494d-9779-7b0c21d81a25.jpg"
                                             alt="" class="w-8 h-8">
@@ -300,7 +300,7 @@
                                     </x-secondary-button>
                                     <x-secondary-button
                                         wire:click="$set('Type', 'Hotel')"
-                                        class=" rounded-xl  capitalize !text-lg !font-bold !border-black flex flex-col !justify-start !items-start gap-9 w-1/4 {{$Type == 'Hotel' ? '!bg-gray-200' : ''}}">
+                                        class=" rounded-xl  capitalize !text-lg !font-bold !border-black flex flex-col !justify-start !items-start gap-8 w-1/4 !h-fit {{$Type == 'Hotel' ? '!bg-gray-200' : ''}}">
                                         <img
                                             src="https://a0.muscache.com/pictures/64b27fed-56a1-4f03-950a-d8da08efb428.jpg"
                                             alt="" class="w-8 h-8">
@@ -311,7 +311,7 @@
                                     <x-secondary-button
                                         wire:click="$set('Type', 'Guest House ')"
 
-                                        class=" rounded-xl  capitalize !text-lg !font-bold !border-black flex flex-col !justify-start !items-start gap-9 w-1/4 {{$Type == 'Guest House ' ? '!bg-gray-200' : ''}}">
+                                        class=" rounded-xl  capitalize !text-lg !font-bold !border-black flex flex-col !justify-start !items-start gap-8 w-1/4 !h-fit {{$Type == 'GuestHouse ' ? '!bg-gray-200' : ''}}">
                                         <img
                                             src="https://a0.muscache.com/pictures/6f261426-2e47-4c91-8b1a-7a847da2b21b.jpg"
                                             alt="" class="w-8 h-8">

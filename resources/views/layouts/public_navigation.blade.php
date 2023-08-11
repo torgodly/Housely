@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 sticky top-0 z-50">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 sticky top-0 z-30">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
@@ -12,33 +12,33 @@
 
             {{--search bar--}}
             @if(request()->routeIs('estate.index'))
-                <div
-                    class="shrink-0 flex items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
-                    <div id="search-bar"
-                         class="pl-2 rounded-full  border   shadow-md hover:shadow-lg transition duration-200 ease-in-out flex justify-between items-center gap-8 md:gap-28">
-                        <h1 class="px-4 font-bold text-sm">Start your search</h1>
-                        <div
-                            class="rounded-full bg-[#ff385c] w-8 h-8 flex justify-center items-center my-[7px] mr-[7px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"
-                                 role="presentation" focusable="false"
-                                 class=" w-3 h-3 stroke-white stroke-[5.33333]">
-                                <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9" class=""></path>
-                            </svg>
-                        </div>
+{{--                <div wire:click="ShowFilter"--}}
+{{--                    class="shrink-0 flex items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">--}}
+{{--                    <div id="search-bar"--}}
+{{--                         class="pl-2 rounded-full  border   shadow-md hover:shadow-lg transition duration-200 ease-in-out flex justify-between items-center gap-8 md:gap-28">--}}
+{{--                        <h1 class="px-4 font-bold text-sm">Start your search</h1>--}}
+{{--                        <div--}}
+{{--                            class="rounded-full bg-[#ff385c] w-8 h-8 flex justify-center items-center my-[7px] mr-[7px]">--}}
+{{--                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"--}}
+{{--                                 role="presentation" focusable="false"--}}
+{{--                                 class=" w-3 h-3 stroke-white stroke-[5.33333]">--}}
+{{--                                <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9" class=""></path>--}}
+{{--                            </svg>--}}
+{{--                        </div>--}}
 
-                    </div>
+{{--                    </div>--}}
 
-                </div>
+{{--                </div>--}}
             @endif
             {{--            setting + language + add your house--}}
             <div class="shrink-0 flex items-center justify-between gap-5" x-data="{LanguageToggle: false}">
-                @if(request()->routeIs('estate.index'))
-                    <x-secondary-button
-                        class="border-0 !shadow-none focus:ring-0 hover:bg-[#F7F7F7] focus:border-0 !rounded-full hidden md:block !py-2 !px-4 !text-base  !normal-case">
-                        Add
-                        your house
-                    </x-secondary-button>
-                @endif
+{{--                @if(request()->routeIs('estate.index'))--}}
+{{--                    <x-secondary-button--}}
+{{--                        class="border-0 !shadow-none focus:ring-0 hover:bg-[#F7F7F7] focus:border-0 !rounded-full hidden md:block !py-2 !px-4 !text-base  !normal-case">--}}
+{{--                        Add--}}
+{{--                        your house--}}
+{{--                    </x-secondary-button>--}}
+{{--                @endif--}}
 
                 <div class="hover:bg-gray-100 rounded-full p-2" @click="LanguageToggle = !LanguageToggle">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world" width="20"

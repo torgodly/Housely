@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100" dir="ltr">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -29,7 +29,41 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden sm:flex sm:items-center sm:ml-6" x-data="{LanguageToggle: false}">
+                <div class="hover:bg-gray-100 rounded-full p-2" @click="LanguageToggle = !LanguageToggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world" width="20"
+                         height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                        <path d="M3.6 9h16.8"></path>
+                        <path d="M3.6 15h16.8"></path>
+                        <path d="M11.5 3a17 17 0 0 0 0 18"></path>
+                        <path d="M12.5 3a17 17 0 0 1 0 18"></path>
+                    </svg>
+
+                    <div x-show="LanguageToggle"
+                         class="z-50 absolute my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow "
+                    >
+                        <ul class="py-2" role="none">
+
+                            @foreach (Config::get('languages') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                    <a href="{{ route('lang.switch', $lang) }}"
+                                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                                       role="menuitem">
+                                        <div class="inline-flex items-center gap-2">
+                                            <span class="fi fi-{{ $language['flag-icon'] }}"></span>
+                                            <h1>{{ $language['display'] }}</h1>
+                                        </div>
+                                    </a>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+
+                </div>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
