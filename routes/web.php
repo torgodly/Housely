@@ -58,6 +58,9 @@ Route::middleware('auth', 'admin')->group(function () {
     //destroy estate
     Route::delete('/estate/{estate}', [\App\Http\Controllers\EstateController::class, 'destroy'])->name('estate.destroy');
 
+    //store estate
+    Route::post('/estate', [\App\Http\Controllers\EstateController::class, 'store'])->name('estate.store');
+
 
 });
 

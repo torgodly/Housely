@@ -27,14 +27,17 @@ class Create extends Component
     public $commission;
     public $company;
     public $floors;
+    public $bedrooms;
+    public $bathrooms;
     public $description;
     public $utilities = [];
     public $images = [];
+    public $search;
 
 
     public function render()
     {
-        $allUtilities = Utility::all();
+        $allUtilities = Utility::query()->search(['name'], $this->search)->paginate(10);
 
         return view('livewire.estate.create', compact('allUtilities'));
     }
@@ -48,45 +51,60 @@ class Create extends Component
 
     public function nextStep()
     {
+        switch ($this->step) {
+            case 1:
+                $this->validate([
+                    'title' => 'required',
+                    'type' => 'required',
+                    'address' => 'required',
+                    'city' => 'required',
+                    'country' => 'required',
+                    'company' => 'required',
+                ]);
+                break;
+            case 2:
+                $this->validate([
+                    'land_area' => 'required',
+                    'building_area' => 'required',
+                ]);
+                break;
+            case 3:
+                $this->validate([
+                    'longitude' => 'required',
+                    'latitude' => 'required'
+                ]);
+                break;
+            case 4:
+                $this->validate([
+                    'price' => 'required',
+                    'discount' => 'nullable',
+                    'commission' => 'nullable',
+                ]);
+                break;
+            case 5:
+                $this->validate([
+                    'floors' => 'nullable',
+                    'bedrooms' => 'nullable',
+                    'bathrooms' => 'nullable',
+                ]);
+                break;
+            case 6:
+                $this->validate([
+                    'description' => 'nullable',
+                ]);
+                break;
+            case 7:
+                $this->validate([
+                    'utilities' => 'nullable',
+                ]);
+                break;
+            case 8:
+                $this->validate([
+                    'images' => 'required',
+                    'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
+                break;
 
-//        dd($this->price);
-        if ($this->step == 1) {
-            $this->validate([
-                'title' => 'required',
-                'company' => 'required',
-                'discount' => 'required',
-                'commission' => 'required',
-                'floors' => 'required',
-                'description' => 'required',
-            ]);
-        }
-        if ($this->step == 2) {
-            $this->validate([
-                'type' => 'required',
-                'address' => 'required',
-                'city' => 'required',
-                'country' => 'required',
-                'land_area' => 'required',
-                'building_area' => 'required',
-                'price' => 'required',
-            ]);
-        }
-        if ($this->step == 3) {
-            $this->validate([
-                'utilities' => 'required',
-                'utilities.*.quantity' => 'required|numeric|min:1',
-            ]);
-        }
-        if ($this->step == 4) {
-            $this->validate([
-                'longitude' => 'required',
-                'latitude' => 'required',
-            ]);
-        }
-        if ($this->step == 5) {
-            $this->validate([
-                'images.*' => 'required|image|max:1024', // 1MB Max
-            ]);
         }
         $this->step++;
 

@@ -4,7 +4,7 @@
 
         <div class="relative p-4 sm:p-8 bg-white shadow sm:rounded-lg absolute">
 
-            <x-steps steps="5" current="{{$step}}"></x-steps>
+            <x-steps steps="8" current="{{$step}}"></x-steps>
 
             <div class="max-w-full">
 
@@ -14,245 +14,285 @@
                             {{ __('create New Estate') }}
                         </h2>
                     </header>
-                    <div class="mt-6 space-y-6">
-                        <div class="{{ $step != 1 ? 'hidden' : '' }} max-w-xl">
-                            <div>
-                                <x-input-label for="title" :value="__('Estate title')"/>
+                    <form action="{{route('estate.store')}}" method="post">
+                        @csrf
+                        <div class="mt-6 space-y-6">
+                            <div class="{{ $step != 1 ? 'hidden' : '' }} max-w-xl">
+                                <div>
+                                    <x-input-label for="title" :value="__('Estate title')"/>
 
-                                <x-text-input id="title" name="title" type="text" class="mt-1 block w-full"
-                                              wire:model="title"
-                                              autocomplete="title"/>
-                                <x-input-error :messages="$errors->get('title')"
-                                               class="mt-2"/>
-                            </div>
-                            <div>
-                                <x-input-label for="company" :value="__('Estate company')"/>
+                                    <x-text-input id="title" name="title" type="text" class="mt-1 block w-full"
+                                                  wire:model="title"
+                                                  autocomplete="title"/>
+                                    <x-input-error :messages="$errors->get('title')"
+                                                   class="mt-2"/>
+                                </div>
+                                <div>
+                                    <x-input-label for="type" :value="__('Estate Type')"/>
 
-                                <x-text-input id="company" name="company" type="text" class="mt-1 block w-full"
-                                              wire:model="company"
-                                              autocomplete="company"/>
-                                <x-input-error :messages="$errors->get('company')"
-                                               class="mt-2"/>
-                            </div>
-                            <div>
-                                <x-input-label for="discount" :value="__('price discount')"/>
+                                    <x-select-input id="type" name="type" label="Estate Type" type="text"
+                                                    class="mt-1 block w-full"
+                                                    wire:model="type"
+                                                    :options="\App\Enums\EstateType::array()"
 
-                                <x-text-input id="discount" name="discount" type="number" class="mt-1 block w-full"
-                                              wire:model="discount"
-                                              autocomplete="discount"/>
-                                <x-input-error :messages="$errors->get('discount')"
-                                               class="mt-2"/>
-                            </div>
-                            <div>
-                                <x-input-label for="commission" :value="__('price commission')"/>
+                                                    autocomplete="type"/>
+                                    <x-input-error :messages="$errors->get('type')"
+                                                   class="mt-2"/>
+                                </div>
+                                <div>
+                                    <x-input-label for="address" :value="__('Estate Address')"/>
 
-                                <x-text-input id="commission" name="commission" type="number" class="mt-1 block w-full"
-                                              wire:model="commission"
-                                              autocomplete="commission"/>
-                                <x-input-error :messages="$errors->get('commission')"
-                                               class="mt-2"/>
-                            </div>
-                            <div>
-                                <x-input-label for="floors" :value="__('Estate Floors')"/>
+                                    <x-text-input id="address" name="address" type="text" class="mt-1 block w-full"
+                                                  wire:model="address"
+                                                  autocomplete="address"/>
+                                    <x-input-error :messages="$errors->get('address')"
+                                                   class="mt-2"/>
+                                </div>
+                                <div>
+                                    <x-input-label for="city" :value="__('Estate City')"/>
 
-                                <x-text-input id="floors" name="floors" type="number" class="mt-1 block w-full"
-                                              wire:model="floors"
-                                              autocomplete="floors"/>
-                                <x-input-error :messages="$errors->get('floors')"
-                                               class="mt-2"/>
+                                    <x-text-input id="city" name="city" type="text" class="mt-1 block w-full"
+                                                  wire:model="city"
+                                                  autocomplete="city"/>
+                                    <x-input-error :messages="$errors->get('city')"
+                                                   class="mt-2"/>
+                                </div>
+                                <div>
+                                    <x-input-label for="country" :value="__('Estate Country')"/>
+
+                                    <x-text-input id="country" name="country" type="text" class="mt-1 block w-full"
+                                                  wire:model="country"
+                                                  autocomplete="country"/>
+                                    <x-input-error :messages="$errors->get('country')"
+                                                   class="mt-2"/>
+                                </div>
+                                <div>
+                                    <x-input-label for="company" :value="__('Estate Company')"/>
+
+                                    <x-text-input id="company" name="company" type="text" class="mt-1 block w-full"
+                                                  wire:model="company"
+                                                  autocomplete="company"/>
+                                    <x-input-error :messages="$errors->get('company')"
+                                                   class="mt-2"/>
+                                </div>
                             </div>
-                            <div>
-                                <x-input-label for="description" :value="__('Estate description')"/>
+                            <div class="{{ $step != 2 ? 'hidden' : '' }} max-w-xl">
+                                <div>
+                                    <x-input-label for="land_area" :value="__('Estate Land Area')"/>
+                                    <x-text-input id="land_area" name="land_area" type="number" step="0.00001"
+                                                  class="mt-1 block w-full" wire:model="land_area"
+                                                  autocomplete="land_area"/>
+                                    <x-input-error :messages="$errors->get('land_area')"
+                                                   class="mt-2"/>
+                                </div>
+                                <div>
+                                    <x-input-label for="building_area" :value="__('Estate Building Area')"/>
+                                    <x-text-input id="building_area" name="building_area" type="number" step="0.00001"
+                                                  class="mt-1 block w-full" wire:model="building_area"
+                                                  autocomplete="building_area"/>
+                                    <x-input-error :messages="$errors->get('building_area')"
+                                                   class="mt-2"/>
+                                </div>
+
+                            </div>
+                            <div class="{{ $step != 3 ? 'hidden' : '' }}">
+                                <div class="" wire:ignore>
+
+                                    <div id="map" style="width:100%; height:400px;"></div>
+
+                                    <p>Longitude: <span id="longitude"></span></p>
+                                    <p>Latitude: <span id="latitude"></span></p>
+                                    <x-text-input id="lat" name="lat" type="hidden" wire:model="latitude"/>
+                                    <x-text-input id="long" name="long" type="hidden" wire:model="longitude"/>
+                                </div>
+                            </div>
+                            <div class="{{ $step != 4 ? 'hidden' : '' }} max-w-xl">
+                                <div>
+                                    <x-input-label for="price" :value="__('Estate Price')"/>
+                                    <x-text-input id="price" name="price" type="number" step="0.00001"
+                                                  class="mt-1 block w-full" wire:model="price"
+                                                  autocomplete="price"/>
+                                    <x-input-error :messages="$errors->get('price')"
+                                                   class="mt-2"/>
+                                </div>
+                                <div>
+                                    <x-input-label for="discount" :value="__('Estate Discount')"/>
+                                    <x-text-input id="discount" name="discount" type="number" step="0.00001"
+                                                  :value="0"
+                                                  class="mt-1 block w-full" wire:model="discount"
+                                                  autocomplete="discount"/>
+                                    <x-input-error :messages="$errors->get('discount')"
+                                                   class="mt-2"/>
+                                </div>
+                                <div>
+                                    <x-input-label for="commission" :value="__('Estate Commission')"/>
+                                    <x-text-input id="commission" name="commission" type="number" step="0.00001"
+                                                  class="mt-1 block w-full" wire:model="commission"
+                                                  :value="0"
+                                                  autocomplete="commission"/>
+                                    <x-input-error :messages="$errors->get('commission')"
+                                                   class="mt-2"/>
+                                </div>
 
 
-                                <textarea name="description" wire:model="description"
-                                          id="" cols="30" rows="10"></textarea>
-                                <x-input-error :messages="$errors->get('description')"
-                                               class="mt-2"/>
                             </div>
-                        </div>
-                        <div class="{{ $step != 2 ? 'hidden' : '' }} max-w-xl">
-                            <div>
-                                <x-input-label for="type" :value="__('Estate Type')"/>
+                            <div class="{{ $step != 5 ? 'hidden' : '' }} max-w-xl">
+                                <div>
+                                    <x-input-label for="floors" :value="__('Estate Floors')"/>
+                                    <x-text-input id="floors" name="floors" type="number" step="0.00001"
+                                                  class="mt-1 block w-full" wire:model="floors"
+                                                  autocomplete="floors"/>
+                                    <x-input-error :messages="$errors->get('floors')"
+                                                   class="mt-2"/>
+                                </div>
+                                <div>
+                                    <x-input-label for="bedrooms" :value="__('Estate Bedrooms')"/>
+                                    <x-text-input id="bedrooms" name="bedrooms" type="number" step="0.00001"
+                                                  :value="0"
+                                                  class="mt-1 block w-full" wire:model="bedrooms"
+                                                  autocomplete="bedrooms"/>
+                                    <x-input-error :messages="$errors->get('bedrooms')"
+                                                   class="mt-2"/>
+                                </div>
+                                <div>
+                                    <x-input-label for="bathrooms" :value="__('Estate Bathrooms')"/>
+                                    <x-text-input id="bathrooms" name="bathrooms" type="number" step="0.00001"
+                                                  class="mt-1 block w-full" wire:model="bathrooms"
+                                                  :value="0"
+                                                  autocomplete="bathrooms"/>
+                                    <x-input-error :messages="$errors->get('bathrooms')"
+                                                   class="mt-2"/>
+                                </div>
+                            </div>
+                            <div class="{{ $step != 6 ? 'hidden' : '' }} ">
+                                <div class="w-full" wire:ignore>
+                                    <x-input-label for="description" :value="__('Description')"/>
+                                    <x-WYSIWYG name="description"></x-WYSIWYG>
+                                    <x-input-error :messages="$errors->get('description')" class="mt-2 "/>
 
-                                <x-select-input label="type" name="type"
-                                                class="block mt-1 w-full" wire:model="type"
-                                                :options="['House' => 'house','Land' => 'land', 'Flat' => 'flat']"/>
-                                <x-input-error :messages="$errors->get('type')"
-                                               class="mt-2"/>
+                                </div>
                             </div>
-                            <div>
-                                <x-input-label for="address" :value="__('Estate Address')"/>
-                                <x-text-input id="address" name="address" type="text" class="mt-1 block w-full"
-                                              wire:model="address"
-                                              autocomplete="address"/>
-                                <x-input-error :messages="$errors->get('address')" class="mt-2"/>
-                            </div>
-                            <div>
-                                <x-input-label for="city" :value="__('Estate city')"/>
-                                <x-select-input label="city" name="city" wire:model="city"
-                                                class="block mt-1 w-full"
-                                                :options="['Triploi' => 'Triploi','Athens' => 'Athens','Bangazi' => 'Bangazi', 'misrat' => 'misrat',]"/>
-                                <x-input-error :messages="$errors->get('city')"
-                                               class="mt-2"/>
-                            </div>
-                            <div>
-                                <x-input-label for="country" :value="__('Estate country')"/>
-                                <x-select-input label="country" name="country" wire:model="country"
-                                                class="block mt-1 w-full"
-                                                :options="['libya' => 'libya' ,'Egypt'=>'Egypt' ]"/>
-                                <x-input-error :messages="$errors->get('country')"
-                                               class="mt-2"/>
-                            </div>
-                            <div>
-                                <x-input-label for="land_area" :value="__('Estate Land Area')"/>
-                                <x-text-input id="land_area" name="land_area" type="number" step="0.00001"
-                                              class="mt-1 block w-full" wire:model="land_area"
-                                              autocomplete="land_area"/>
-                                <x-input-error :messages="$errors->get('land_area')"
-                                               class="mt-2"/>
-                            </div>
-                            <div>
-                                <x-input-label for="building_area" :value="__('Estate Building Area')"/>
-                                <x-text-input id="building_area" name="building_area" type="number" step="0.00001"
-                                              class="mt-1 block w-full" wire:model="building_area"
-                                              autocomplete="building_area"/>
-                                <x-input-error :messages="$errors->get('building_area')"
-                                               class="mt-2"/>
-                            </div>
-                            <div>
-                                <x-input-label for="price" :value="__('Estate price')"/>
-                                <x-text-input id="price" name="price" type="number" step="0.00001"
-                                              class="mt-1 block w-full" wire:model="price"
-                                              autocomplete="price"/>
-                                <x-input-error :messages="$errors->get('price')"
-                                               class="mt-2"/>
-                            </div>
+                            <div class="{{ $step != 7 ? 'hidden' : '' }}">
+                                <div class="">
+                                    <div class="py-12">
+                                        <div class="w-full  mx-auto sm:px-6 lg:px-8">
+                                            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-                        </div>
-                        <div class="{{ $step != 3 ? 'hidden' : '' }}">
-                            <div class="">
-                                <div class="py-12">
-                                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-                                            <div class="flex flex-col">
-                                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                                    <div
-                                                        class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                                        <div
-                                                            class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                                            <table class="min-w-full divide-y divide-gray-200">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('name')}}</th>
-                                                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('select')}}</th>
-                                                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('count')}}</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody class="bg-white divide-y divide-gray-200">
-                                                                @foreach($allUtilities as $allUtilitie)
-                                                                    <tr>
-                                                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                                                            <div class="flex items-center">
-                                                                                <div>
-                                                                                    <div
-                                                                                        class="text-sm leading-5 font-medium text-gray-900">{{ $allUtilitie->name }}</div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
+                                                <div
+                                                    class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
+                                                    <div class="py-1.5">
+                                                        <x-text-input type="text" class="mt-1 block w-1/3"
+                                                                      wire:model="search"
+                                                                      placeholder="{{__('search')}}"/>
 
-                                                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                                                            <div
-                                                                                class="text-sm leading-5 text-gray-900">
-                                                                                <x-text-input type="checkbox"
-                                                                                              wire:click="toggleUtility({{$allUtilitie->id}})"
-                                                                                              value="1"/>
-                                                                            </div>
-                                                                        </td>
-
-                                                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                                                            <div
-                                                                                class="text-sm leading-5 text-gray-900">
-                                                                                @if(isset($utilities[$allUtilitie->id]['quantity']))
-                                                                                    <x-text-input type="number"
-                                                                                                  wire:model.lazy="utilities.{{ $allUtilitie->id }}.quantity"
-                                                                                                  value="{{$utilities[$allUtilitie->id]['quantity'] ?? 1}}"/>
-
-                                                                                @else
-                                                                                    <x-text-input type="number" disabled
-                                                                                                  wire:model.lazy="utilities.{{ $allUtilitie->id }}.quantity"
-                                                                                                  class="bg-gray-100"/>
-                                                                                @endif
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            </table>
-                                                            <div
-                                                                class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                                                                {{-- {{ $attendances->links() }} --}}
-                                                            </div>
-                                                        </div>
                                                     </div>
+                                                    <div class="min-w-full align-middle">
+                                                        <table class="min-w-full divide-y divide-gray-200 border">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
+                                                                    wire:click="OrderBy('code')">
+                                <span
+                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('name')}}</span>
+                                                                </th>
+                                                                <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
+                                                                    wire:click="OrderBy('code')">
+                                <span
+                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('select')}}</span>
+                                                                </th>
+                                                                <th class="px-6 py-3 bg-gray-50 text-left cursor-pointer"
+                                                                    wire:click="OrderBy('code')">
+                                <span
+                                    class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('count')}}</span>
+                                                                </th>
+
+                                                            </tr>
+                                                            </thead>
+
+                                                            <tbody
+                                                                class="bg-white divide-y divide-gray-200 divide-solid">
+                                                            @foreach($allUtilities as $allUtilitie)
+                                                                <tr class="bg-white cursor-pointer">
+                                                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                                                        {{ $allUtilitie->name }}
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                                                        <x-text-input type="checkbox"
+                                                                                      wire:click="toggleUtility({{$allUtilitie->id}})"
+                                                                                      value="1"/>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                                                        @if(isset($utilities[$allUtilitie->id]['quantity']))
+                                                                            <x-text-input type="number"
+                                                                                          wire:model.lazy="utilities.{{ $allUtilitie->id }}.quantity"
+                                                                                          value="{{$utilities[$allUtilitie->id]['quantity'] ?? 1}}"/>
+
+                                                                        @else
+                                                                            <x-text-input type="number"
+                                                                                          disabled
+                                                                                          wire:model.lazy="utilities.{{ $allUtilitie->id }}.quantity"
+                                                                                          class="bg-gray-100"/>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+
+                                                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="mt-2">
+                                                        {{ $allUtilities->links() }}
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
-                                </div>
 
-                            </div>
-
-
-                        </div>
-                        <div class="{{ $step != 4 ? 'hidden' : '' }}">
-                            <div class="" wire:ignore>
-
-                                <div id="map" style="width:100%; height:400px;"></div>
-
-                                <p>Longitude: <span id="longitude"></span></p>
-                                <p>Latitude: <span id="latitude"></span></p>
-                            </div>
-
-
-                        </div>
-                        <div class="{{ $step != 5 ? 'hidden' : '' }}">
-                            <div class="" wire:ignore>
-
-                                <div class="mb-4">
-                                    <label for="images" class="block font-medium text-gray-700">Estate Images</label>
-                                    <x-text-input accept="image/jpg, image/png, image/jpeg" name="images[]" id="images"
-                                                  multiple wire:model="images" onchange="previewImages()"
-                                                  class="block w-full text-sm text-gray-900 border border-gray-700 rounded-lg cursor-pointer bg-gray-50 focus:outline-none "
-                                                  type='file'/>
                                 </div>
 
 
-                                <div id="preview" class="flex justify-center items-center gap-4 flex-wrap"></div>
+                            </div>
+                            <div class="{{ $step != 8 ? 'hidden' : '' }}">
+                                <div class="" wire:ignore>
+
+                                    <div class="mb-4">
+                                        <label for="images" class="block font-medium text-gray-700">Estate
+                                            Images</label>
+                                        <x-text-input accept="image/jpg, image/png, image/jpeg" name="images[]"
+                                                      id="images"
+                                                      multiple wire:model="images" onchange="previewImages()"
+                                                      class="block w-full text-sm text-gray-900 border border-gray-700 rounded-lg cursor-pointer bg-gray-50 focus:outline-none "
+                                                      type='file'/>
+                                    </div>
+
+
+                                    <div id="preview" class="flex justify-center items-center gap-4 flex-wrap"></div>
+
+
+                                </div>
 
 
                             </div>
+                            <div class="flex items-center justify-between flex-row-reverse gap-4">
+                                @if($step != 8)
+                                    <x-primary-button wire:click="nextStep" disabled="{{ $step == 8 }}"
+                                                      type="button">{{ __('Next') }}</x-primary-button>
+                                    <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
+                                                      type="button">{{ __('prev') }}</x-primary-button>
+                                @else
+                                    <x-primary-button
+                                        type="Submit">{{ __('Submit') }}</x-primary-button>
+                                    <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
+                                                      type="button">{{ __('prev') }}</x-primary-button>
+                                @endif
 
-
-                        </div>
-                        <div class="flex items-center justify-between flex-row-reverse gap-4">
-                            @if($step != 5)
-                                <x-primary-button wire:click="nextStep" disabled="{{ $step == 5 }}"
-                                                  type="button">{{ __('Next') }}</x-primary-button>
-                                <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
-                                                  type="button">{{ __('prev') }}</x-primary-button>
-                            @else
-
-                                <x-primary-button wire:click="submit"
-                                                  type="button">{{ __('Submit') }}</x-primary-button>
-                                <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
-                                                  type="button">{{ __('prev') }}</x-primary-button>
-
-                            @endif
+                            </div>
 
                         </div>
-
-                    </div>
-
+                    </form>
                 </section>
             </div>
         </div>

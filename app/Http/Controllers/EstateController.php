@@ -53,5 +53,65 @@ class EstateController extends Controller
         return redirect()->route('estates.index');
     }
 
+    //store
+    public function store(Request $request)
+    {
+
+        dd($request->all());
+        $request->validate([
+            'code' => 'required|unique:estates',
+            'title' => 'required',
+            'type' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'land_area' => 'required',
+            'building_area' => 'required',
+            'long' => 'required',
+            'lat' => 'required',
+            'price' => 'required',
+            'discount' => 'nullable',
+            'commission' => 'nullable',
+            'floors' => 'nullable',
+            'bedrooms' => 'nullable',
+            'bathrooms' => 'nullable',
+            'description' => 'nullable',
+            'available' => 'nullable',
+            'sold_at' => 'nullable',
+            'company' => 'required',
+            'utilities' => 'nullable',
+            'images' => 'nullable',
+        ]);
+
+        $estate = Estate::create([
+            'code' => $request->code,
+            'title' => $request->title,
+            'type' => $request->type,
+            'address' => $request->address,
+            'city' => $request->city,
+            'country' => $request->country,
+            'land_area' => $request->land_area,
+            'building_area' => $request->building_area,
+            'long' => $request->long,
+            'lat' => $request->lat,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'commission' => $request->commission,
+            'floors' => $request->floors,
+            'bedrooms' => $request->bedrooms,
+            'bathrooms' => $request->bathrooms,
+            'description' => $request->description,
+            'available' => $request->available,
+            'sold_at' => $request->sold_at,
+            'company' => $request->company,
+        ]);
+
+        $estate->utilities()->attach($request->utilities);
+
+        $estate->images()->createMany($request->images);
+
+        session()->flash('Message', 'Estate created successfully');
+        return redirect()->route('estates.index');
+    }
 
 }
