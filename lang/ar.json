@@ -117,5 +117,18 @@
     "Favorites": "المفضلة",
     "No estates found": "لم يتم العثور على عقارات",
     "Sorry, but there are no estates that found maybe change the filter that you have applied. Please try different filter options or contact the support.": "عذرا، لا توجد عقارات تم العثور عليها ربما تغيير التصفية التي قمت بتطبيقها. يرجى تجربة خيارات تصفية مختلفة أو الاتصال بالدعم.",
-    "Clear Filter": "مسح التصفية"
+    "Clear Filter": "مسح التصفية",
+    "Used times": "مرات الاستخدام",
+    "Edit": "تعديل",
+    "Delete": "حذف",
+    "Create Utility": "إنشاء مرفق",
+    "search by name": "البحث بالاسم",
+    "Are you sure you want to delete this Utility?": "هل أنت متأكد أنك تريد حذف هذا المرفق؟",
+    "Once your Utility is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete the Utility.": "بمجرد حذف المرفق الخاص بك، سيتم حذف جميع الموارد والبيانات الخاصة به بشكل دائم. يرجى إدخال كلمة المرور الخاصة بك لتأكيد أنك ترغب في حذف المرفق الخاص بك بشكل دائم",
+    "Update Utility Name": "تحديث اسم المرفق",
+    "Please enter the new name for the Utility.": "يرجى إدخال الاسم الجديد للمرفق.",
+    "Create New Utility": "إنشاء مرفق جديد",
+    "Please enter the name for the new Utility.":  "يرجى إدخال الاسم للمرفق الجديد.",
+    "Update": "تحديث",
+    "Create": "إنشاء"
 }

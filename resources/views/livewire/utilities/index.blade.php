@@ -62,7 +62,7 @@
 
                                         wire:click="confirmUtilityDeletion({{ $utility->id }})"
                                         x-on:click.prevent="$dispatch('open-modal', 'confirm-utility-deletion')"
-                                    >{{ __('Delete Utility') }}
+                                    >{{ __('Delete') }}
                                     </x-danger-button>
                                 </td>
 
@@ -99,7 +99,7 @@
                 </x-secondary-button>
 
                 <x-danger-button class="ml-3">
-                    {{ __('Delete Utility') }}
+                    {{ __('Delete') }}
                 </x-danger-button>
             </div>
         </form>
@@ -136,7 +136,7 @@
                 </x-secondary-button>
 
                 <x-danger-button class="ml-3">
-                    {{ __('Update Utility') }}
+                    {{ __('Update') }}
                 </x-danger-button>
             </div>
         </form>
@@ -150,7 +150,7 @@
             </h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                {{ __('Please enter the new name for the Utility.') }}
+                {{ __('Please enter the name for the new Utility.') }}
             </p>
             <div class="mt-6">
                 <x-input-label for="name" value="{{ __('Utility') }}" class="sr-only"/>
@@ -171,7 +171,7 @@
                 </x-secondary-button>
 
                 <x-danger-button class="ml-3">
-                    {{ __('Create Utility') }}
+                    {{ __('Create') }}
                 </x-danger-button>
             </div>
         </form>
