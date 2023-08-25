@@ -49,7 +49,7 @@ class EstateController extends Controller
         ]);
         $estate = Estate::withoutGlobalScopes()->find($estate);
         $estate->delete();
-        session()->flash('Message', 'Estate deleted successfully');
+        session()->flash('Message', __('Estate deleted successfully'));
         return redirect()->route('estates.index');
     }
 
@@ -110,7 +110,7 @@ class EstateController extends Controller
 
         $estate->images()->createMany($request->images);
 
-        session()->flash('Message', 'Estate created successfully');
+        session()->flash('Message', __('Estate created successfully'));
         return redirect()->route('estates.index');
     }
 

@@ -20,7 +20,6 @@
     "This is a secure area of the application. Please confirm your password before continuing.": "هذه منطقة آمنة من التطبيق. يرجى تأكيد كلمة المرور الخاصة بك قبل المتابعة.",
     "Whoops! Something went wrong.": "عذراً! حدث خطأ ما.",
     "Estate": "العقار",
-    "Clear Filter": "مسح التصفية",
     "Filter": "تصفية",
     "You Dont have Any Favorite Estates": "ليس لديك أي عقارات مفضلة",
     "Sorry, You Dont have Any Favorite Estates add some Estates to your Favorites": "عذراً ، ليس لديك أي عقارات مفضلة أضف بعض العقارات إلى المفضلة",
@@ -58,6 +57,7 @@
     "What this place offers": "ما يقدمه هذا المكان",
     "show_all_utilities": "عرض جميع :count المرافق",
     "utilities": "المرافق",
+
     "Order": "طلب",
     "Cancel Order": "إلغاء الطلب",
     "Mark as available": "وضع علامة كمتاح",
@@ -114,5 +114,8 @@
     "To": "إلى",
     "Create Estate": "إنشاء عقار",
     "Apply filters ": "تطبيق التصفية ",
-    "Favorites": "المفضلة"
+    "Favorites": "المفضلة",
+    "No estates found": "لم يتم العثور على عقارات",
+    "Sorry, but there are no estates that found maybe change the filter that you have applied. Please try different filter options or contact the support.": "عذرا، لا توجد عقارات تم العثور عليها ربما تغيير التصفية التي قمت بتطبيقها. يرجى تجربة خيارات تصفية مختلفة أو الاتصال بالدعم.",
+    "Clear Filter": "مسح التصفية"
 }

@@ -25,6 +25,9 @@
                     <x-nav-link :href="route('estates.index')" :active="request()->routeIs('estates.index')">
                         {{ __('Estates') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('utilities.index')" :active="request()->routeIs('utilities.index')">
+                        {{ __('utilities') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -88,7 +91,15 @@
                         <x-dropdown-link :href="route('estate.create')">
                             {{ __('Create Estate') }}
                         </x-dropdown-link>
-
+                        <x-dropdown-link :href="route('orders.index')">
+                            {{ __('Orders') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('estates.index')">
+                            {{ __('Estates') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('utilities.index')">
+                            {{ __('utilities') }}
+                        </x-dropdown-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

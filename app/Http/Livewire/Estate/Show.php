@@ -42,14 +42,14 @@ class Show extends Component
             'estate_id' => $this->estate->id,
 
         ]);
-        session()->flash('message', 'Order created successfully.');
+        session()->flash('Message', __('Order created successfully.'));
     }
 
     //cancel order
     public function cancelOrder()
     {
         \Auth::user()->orders()->where('estate_id', $this->estate->id)->delete();
-        session()->flash('message', 'Order canceled successfully.');
+        session()->flash('Message', __('Order canceled successfully.'));
     }
 
     //sold

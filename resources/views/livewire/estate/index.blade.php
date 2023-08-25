@@ -3,8 +3,8 @@
         <!-- component -->
         <div class="w-full h-screen flex flex-col items-center justify-center">
             <div class="flex flex-col items-center justify-center">
-                <p class="text-3xl md:text-4xl lg:text-5xl text-gray-800 mt-12 capitalize">{{__('No estates found matching your filter')}}</p>
-                <p class="md:text-lg lg:text-xl text-gray-600 mt-8 capitalize">{{__('Sorry, but there are no estates that match the filter you have applied. Please try different filter options.')}}</p>
+                <p class="text-3xl md:text-4xl lg:text-5xl text-gray-800 mt-12 capitalize">{{__('No estates found')}}</p>
+                <p class="md:text-lg lg:text-xl text-gray-600 mt-8 capitalize">{{__('Sorry, but there are no estates that found maybe change the filter that you have applied. Please try different filter options or contact the support.')}}</p>
 
                 <x-primary-button
                     wire:click="resetFilter()"

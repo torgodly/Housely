@@ -61,6 +61,8 @@ Route::middleware('auth', 'admin')->group(function () {
     //store estate
     Route::post('/estate', [\App\Http\Controllers\EstateController::class, 'store'])->name('estate.store');
 
+    Route::resource('utilities', \App\Http\Controllers\UtilityController::class);
+
 
 });
 
