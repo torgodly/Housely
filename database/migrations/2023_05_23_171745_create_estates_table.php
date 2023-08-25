@@ -13,26 +13,39 @@ return new class extends Migration {
         Schema::create('estates', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
+
+// Identity
             $table->string('title');
-            $table->string('type');
             $table->string('address');
             $table->string('city');
             $table->string('country');
+
+// Location
+            $table->string('lat');
+            $table->string('long');
+
+// Details
+            $table->string('type');
             $table->float('land_area');
             $table->float('building_area');
-            $table->string('long');
-            $table->string('lat');
+            $table->integer('floors');
+            $table->integer('bedrooms');
+            $table->integer('bathrooms');
+
+// Pricing
             $table->integer('price');
             $table->float('discount')->nullable();
             $table->float('commission')->default(0);
-            $table->integer('floors')->default(0);
-            $table->integer('bedrooms')->default(0);
-            $table->integer('bathrooms')->default(0);
-            $table->text('description')->nullable();
-            $table->boolean('available')->default(0);
+
+// Status
+            $table->boolean('available')->default(true);
             $table->timestamp('sold_at')->nullable();
+
+// Description
+            $table->text('description')->nullable();
+
+// Metadata
             $table->string('company');
-            //TODO: add  estate rent or sale boolean field
 
 
             $table->timestamps();

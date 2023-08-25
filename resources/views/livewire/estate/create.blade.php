@@ -12,10 +12,11 @@
                     <header>
                         <h2 class="text-lg font-medium text-gray-900">
                             {{ __('create New Estate') }}
+                            {{$description}}
                         </h2>
                     </header>
-                    <form action="{{route('estate.store')}}" method="post">
-                        @csrf
+{{--                    <form action="{{route('estate.store')}}" method="post">--}}
+{{--                        @csrf--}}
                         <div class="mt-6 space-y-6">
                             <div class="{{ $step != 1 ? 'hidden' : '' }} max-w-xl">
                                 <div>
@@ -167,7 +168,7 @@
                             <div class="{{ $step != 6 ? 'hidden' : '' }} ">
                                 <div class="w-full" wire:ignore>
                                     <x-input-label for="description" :value="__('Description')"/>
-                                    <x-WYSIWYG name="description"></x-WYSIWYG>
+                                    <x-WYSIWYG name="description" ></x-WYSIWYG>
                                     <x-input-error :messages="$errors->get('description')" class="mt-2 "/>
 
                                 </div>
@@ -283,7 +284,7 @@
                                     <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
                                                       type="button">{{ __('prev') }}</x-primary-button>
                                 @else
-                                    <x-primary-button
+                                    <x-primary-button wire:click="submit"
                                         type="Submit">{{ __('Submit') }}</x-primary-button>
                                     <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
                                                       type="button">{{ __('prev') }}</x-primary-button>
@@ -292,7 +293,7 @@
                             </div>
 
                         </div>
-                    </form>
+{{--                    </form>--}}
                 </section>
             </div>
         </div>

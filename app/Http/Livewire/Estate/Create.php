@@ -126,6 +126,7 @@ class Create extends Component
     {
         // Add your code to save the estate here
         $estate = Estate::create([
+            'code' => uniqid('estate-', false),
             'title' => $this->title,
             'company' => $this->company,
             'type' => $this->type,
@@ -141,6 +142,8 @@ class Create extends Component
             'long' => $this->longitude,
             'lat' => $this->latitude,
             'description' => $this->description,
+            'bedrooms' => $this->bedrooms,
+            'bathrooms' => $this->bathrooms,
         ]);
         //save utilities
         $estate->utilities()->attach($this->utilities);
@@ -163,6 +166,11 @@ class Create extends Component
         } else {
             $this->utilities[$utilityId] = ['quantity' => 1];
         }
+    }
+
+    public function setDescription($value)
+    {
+        $this->description = $value;
     }
 
 }

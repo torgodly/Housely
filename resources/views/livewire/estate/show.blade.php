@@ -170,9 +170,12 @@
                 </div>
                 <div class="mt-8">
                     <h1 class="text-2xl font-bold capitalize">{{__('About this space')}}</h1>
-                    <p class="text-base font-light text-black mt-4 line-clamp-5">
-                        {{$estate->description}}
-                    </p>
+                    <div class="h-10 overflow-hidden">
+                        <p class="text-base font-light text-black mt-4 line-clamp-5  ">
+                            {!! $estate->description !!}
+                        </p>
+                    </div>
+
                     <div class="mt-4 flex items-center cursor-pointer">
                         <h1 class="text-base font-bold underline " @click="ShowDescription = true">
                             {{__('Show more')}}
