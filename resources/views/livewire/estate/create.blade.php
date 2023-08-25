@@ -11,12 +11,10 @@
                 <section>
                     <header>
                         <h2 class="text-lg font-medium text-gray-900">
-                            {{ __('create New Estate') }}
-                            {{$description}}
+                            {{ __('Create New Estate') }}
                         </h2>
                     </header>
-{{--                    <form action="{{route('estate.store')}}" method="post">--}}
-{{--                        @csrf--}}
+
                         <div class="mt-6 space-y-6">
                             <div class="{{ $step != 1 ? 'hidden' : '' }} max-w-xl">
                                 <div>
@@ -101,8 +99,8 @@
 
                                     <div id="map" style="width:100%; height:400px;"></div>
 
-                                    <p>Longitude: <span id="longitude"></span></p>
-                                    <p>Latitude: <span id="latitude"></span></p>
+                                    <p>{{__('Longitude:')}} <span id="longitude"></span></p>
+                                    <p>{{__('Latitude:')}} <span id="latitude"></span></p>
                                     <x-text-input id="lat" name="lat" type="hidden" wire:model="latitude"/>
                                     <x-text-input id="long" name="long" type="hidden" wire:model="longitude"/>
                                 </div>
@@ -260,8 +258,7 @@
                                 <div class="" wire:ignore>
 
                                     <div class="mb-4">
-                                        <label for="images" class="block font-medium text-gray-700">Estate
-                                            Images</label>
+                                        <label for="images" class="block font-medium text-gray-700">{{__('Estate Images')}}</label>
                                         <x-text-input accept="image/jpg, image/png, image/jpeg" name="images[]"
                                                       id="images"
                                                       multiple wire:model="images" onchange="previewImages()"
@@ -282,12 +279,12 @@
                                     <x-primary-button wire:click="nextStep" disabled="{{ $step == 8 }}"
                                                       type="button">{{ __('Next') }}</x-primary-button>
                                     <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
-                                                      type="button">{{ __('prev') }}</x-primary-button>
+                                                      type="button">{{ __('Previous') }}</x-primary-button>
                                 @else
                                     <x-primary-button wire:click="submit"
                                         type="Submit">{{ __('Submit') }}</x-primary-button>
                                     <x-primary-button wire:click="previousStep" disabled="{{ $step == 1 }}"
-                                                      type="button">{{ __('prev') }}</x-primary-button>
+                                                      type="button">{{ __('Previous') }}</x-primary-button>
                                 @endif
 
                             </div>
